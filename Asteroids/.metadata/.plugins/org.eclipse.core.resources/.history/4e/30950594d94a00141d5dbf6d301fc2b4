@@ -1,0 +1,19 @@
+package gameState;
+
+public abstract class GameState {
+	
+	protected GameStateManager gsm;
+	
+	public abstract void init();
+	
+	public abstract update();
+	
+	public abstract keyPressed();
+	
+	public abstract keyReleased();
+	
+	public abstract draw(Graphics2D g);
+	
+	
+	
+}
