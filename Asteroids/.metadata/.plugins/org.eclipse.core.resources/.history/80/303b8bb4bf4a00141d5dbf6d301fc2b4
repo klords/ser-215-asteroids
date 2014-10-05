@@ -1,0 +1,13 @@
+package gameState;
+
+public class GameStateManager extends GameState{
+	
+	private ArrayList<GameState> states;
+
+	public GameStateManager(){
+		states = new ArrayList<GameState>();
+		
+	}
+	
+	
+}

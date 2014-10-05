@@ -15,8 +15,9 @@ public class GamePanel extends JPanel
 					   implements Runnable, KeyListener, Drawable {
 	
 	// screen dimensions
-	public final int WIDTH = 800;
-	public final int HEIGHT = 600;
+	public final static int WIDTH = 800;
+	public final static int HEIGHT = 600;
+
 	
 	private GameStateManager gsm;
 	
@@ -120,6 +121,5 @@ public class GamePanel extends JPanel
 		gsm.update();
 	}
 
-	
-	
 }
+

@@ -14,5 +14,6 @@ public class Asteroids {
 		frame.setVisible(true);
 		
 	}
-	
+
 }
+
