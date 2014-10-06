@@ -94,12 +94,12 @@ public class GamePanel extends JPanel
 	
 	@Override
 	public void keyPressed(KeyEvent key) {
-		gsm.keyPressed(key.getKeyCode());
+		gsm.keyPressed(key);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent key) {
-		gsm.keyReleased(key.getKeyCode());
+		gsm.keyReleased(key);
 	}
 
 	@Override

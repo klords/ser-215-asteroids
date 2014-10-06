@@ -2,6 +2,7 @@ package gamestate;
 
 import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class GameStateManager extends GameState{
@@ -20,15 +21,15 @@ public class GameStateManager extends GameState{
 	public GameStateManager(){
 		states = new ArrayList<GameState>();
 		
-		currentState = MENUSTATE;
+		currentState = LEVEL1STATE;
 		
 		states.add(new MenuState(this));
 	}
 	
-	public void keyPressed(int i){
+	public void keyPressed(KeyEvent e){
 		states.get(currentState).update();
 	}
-	public void keyReleased(int i){
+	public void keyReleased(KeyEvent e){
 		states.get(currentState).update();
 	}
 	public void update(){
