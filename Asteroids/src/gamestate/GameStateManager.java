@@ -1,11 +1,11 @@
 package gamestate;
 
 import java.awt.Graphics2D;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+//import java.awt.event.ActionListener;
+//import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class GameStateManager extends GameState{
+public class GameStateManager {
 	
 	public static final int MENUSTATE=0;
 	public static final int LEVEL1STATE=1;
@@ -15,22 +15,23 @@ public class GameStateManager extends GameState{
 	public static final int LEVEL5STATE=5;
 	
 	private ArrayList<GameState> states;
-	private static ActionListener actListener;
+	//private static ActionListener actListener;
 	private int currentState;
 	
 	public GameStateManager(){
 		states = new ArrayList<GameState>();
 		
-		currentState = LEVEL1STATE;
+		currentState = LEVEL1STATE; //MENUSTATE;
 		
 		states.add(new MenuState(this));
+		states.add(new Level1State(this));
 	}
 	
-	public void keyPressed(KeyEvent e){
-		states.get(currentState).update();
+	public void keyPressed(int k){
+		states.get(currentState).keyPressed(k);
 	}
-	public void keyReleased(KeyEvent e){
-		states.get(currentState).update();
+	public void keyReleased(int k){
+		states.get(currentState).keyReleased(k);
 	}
 	public void update(){
 		states.get(currentState).update();
@@ -43,11 +44,6 @@ public class GameStateManager extends GameState{
 		states.get(currentState).draw(g);
 	}
 
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void init() {}
 
 }

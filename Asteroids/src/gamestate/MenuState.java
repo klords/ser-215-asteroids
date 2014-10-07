@@ -29,7 +29,7 @@ public class MenuState extends GameState{
 		try {
 			mainbg = new Images("/resources/backgrounds/mainbg.png");
 			debrisField0=new Images("/resources/asteroids/debrisField0.png",5.0);
-			
+			debrisField0.setAutoScroll(0, 0.25);
 			init();
 		}
 		catch(Exception e){
@@ -44,17 +44,18 @@ public class MenuState extends GameState{
 		if (currentChoice==0){
 			gsm.setState(GameStateManager.LEVEL1STATE);
 		}
-		//if (currentChoice==1){
+		if (currentChoice==1){
 			//gsm.setState(HIGHSCORESTATE);
-		//}
+		}
 		if (currentChoice==2){
 			System.exit(0);
 		}
 	}
 	@Override
 	public void update() {
-		x+=xDir;
-		y+=yDir;
+		//x+=xDir;
+		//y+=yDir;
+		debrisField0.update();
 		
 	}
 	@Override
@@ -68,12 +69,10 @@ public class MenuState extends GameState{
 	@Override
 	public void keyPressed(int i) {
 		
-		
-		
 	}
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	

@@ -11,13 +11,13 @@ import gamestate.GameStateManager;
 
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel 
 					   implements Runnable, KeyListener, Drawable {
 	
 	// screen dimensions
 	public final static int WIDTH = 800;
 	public final static int HEIGHT = 600;
-
 	
 	private GameStateManager gsm;
 	
@@ -94,12 +94,12 @@ public class GamePanel extends JPanel
 	
 	@Override
 	public void keyPressed(KeyEvent key) {
-		gsm.keyPressed(key);
+		gsm.keyPressed(key.getKeyCode());
 	}
 
 	@Override
 	public void keyReleased(KeyEvent key) {
-		gsm.keyReleased(key);
+		gsm.keyReleased(key.getKeyCode());
 	}
 
 	@Override
