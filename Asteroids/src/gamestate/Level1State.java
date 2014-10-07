@@ -36,11 +36,21 @@ public class Level1State extends GameState{
 		catch(Exception e){
 			e.printStackTrace();
 		}
+		
+		asteroids = new ArrayList<Asteroid>();
+		enemies = new ArrayList<Enemy>();
+		init();
 	}
 
 	@Override
 	public void init() {
-		
+		for (int i = 0; i < 3; i++) {
+			Asteroid a = new Asteroid(this, 
+									  new double[] {Math.random() * GamePanel.WIDTH, Math.random() * GamePanel.HEIGHT}, 
+									  new double[] {Math.random(), Math.random()}, 
+									  Math.random() / 30);
+			asteroids.add(a);
+		}
 	}
 
 	@Override
@@ -56,12 +66,27 @@ public class Level1State extends GameState{
 	@Override
 	public void update() {
 		player.update();
+		if (!asteroids.isEmpty()) {
+			for (int i = 0; i < asteroids.size(); i++) {
+				asteroids.get(i).update();
+			}
+		}
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
 		level1bg.draw(g);
+		if (!asteroids.isEmpty()) {
+			for (int i = 0; i < asteroids.size(); i++) {
+				asteroids.get(i).draw(g);
+			}
+		}
 		player.draw(g);
+		
 	}
 
+	public void removeAsteroid(Asteroid a) {
+		asteroids.remove(a);
+	}
+	
 }
