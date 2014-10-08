@@ -62,13 +62,11 @@ public class Asteroid extends MapObject {
     
     public void draw(Graphics2D g) {
     	super.draw(g);
-    	Graphics2D g2 = (Graphics2D) g.create();
-    	//AffineTransform temp = g.getTransform();
+    	AffineTransform temp = g.getTransform();
     	if (at == null) update();
-    	g2.transform(at);
-    	g2.drawImage(image, (int)position[0], (int)position[1], null);
-    	//g.setTransform(temp);
-    	g2.dispose();
+    	g.transform(at);
+    	g.drawImage(image, (int)position[0], (int)position[1], null);
+    	g.setTransform(temp);
     }
 
     public void hit(int damage) {
@@ -81,7 +79,7 @@ public class Asteroid extends MapObject {
 	private void remove() {
 		if (size > 1) {
 			for (int i = 0; i < 2; i++) {
-				double rand = (Math.random() * 4 - 2);
+				double rand = (Math.random() * 4 - 2) * 2;
 				state.addAsteroid(state, 
 								  new double[] {position[0], position[1]}, 
 								  new double[] {rand * velocity[0], 

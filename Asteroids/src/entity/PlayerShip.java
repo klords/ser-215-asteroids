@@ -1,4 +1,5 @@
 package entity;
+
 import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -139,6 +140,7 @@ public class PlayerShip implements Drawable {
 		angle = 0;
 		angularVelocity = 0;
 		velocity = new double [] {0, 0};
+		thrust(false);
 	}
 	
 	public void thrust(boolean b){
@@ -176,9 +178,9 @@ public class PlayerShip implements Drawable {
 	public void update(){
 		
 		if (isSpawning) {
-			System.out.println("Spawning");
-			if ((System.nanoTime() - spawnTimer) / 1000000 > 3000) {
+			if ((System.nanoTime() - spawnTimer) / 1000000 >= 3000) {
 				isSpawning = false;
+				invulnerable = false;
 			}
 		}
 		
@@ -196,7 +198,11 @@ public class PlayerShip implements Drawable {
 		if (!invulnerable) {
 			for (int i = 0; i < currentState.getAsteroids().size(); i++) {
 				Asteroid a = currentState.getAsteroids().get(i);
-				if (PlayerShip.getDistance(x + radius, y + radius, a.getPosition()[0] + a.getRadius(), a.getPosition()[1] + a.getRadius()) <= radius + a.getRadius()) {
+				if (PlayerShip.getDistance(x + radius, 
+										   y + radius, 
+										   a.getPosition()[0] + a.getRadius(), 
+										   a.getPosition()[1] + a.getRadius()) 
+					<= radius + a.getRadius()) {
 					loseLife();
 				}
 			}
@@ -253,9 +259,9 @@ public class PlayerShip implements Drawable {
 											   y + (height / 2));
 		AffineTransform temp = g.getTransform();	// backup original transform
 		g.transform(at);							// transform graphics context to rotate image
-		if (!(isSpawning && ((System.nanoTime() - spawnTimer) / 1000000 % 1000 <= 500)))
-			System.out.println("true");
+		if (!(isSpawning && ((((System.nanoTime() - spawnTimer) / 1000000) % 250) <= 125))) {
 			g.drawImage(drawImage, (int) x, (int) y, null);
+		}
 		g.setTransform(temp);						// set transform back to original
 		
 		// draw additional ship image for seamless wrap-around effect

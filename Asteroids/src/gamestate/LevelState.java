@@ -26,8 +26,6 @@ public abstract class LevelState extends GameState {
 		this.player = player;
 		debrisField = new DebrisField();
 		
-		asteroids = new ArrayList<Asteroid>();
-		enemies = new ArrayList<Enemy>();
 	}
 
 	public GameStateManager getGSM() {
@@ -36,6 +34,9 @@ public abstract class LevelState extends GameState {
 	
 	@Override
 	public void init() {
+		
+		asteroids = new ArrayList<Asteroid>();
+		enemies = new ArrayList<Enemy>();
 		
 		for (int i = 0; i < numAsteroids; i++) {
 			double newX = Math.random() * GamePanel.WIDTH;
@@ -48,6 +49,8 @@ public abstract class LevelState extends GameState {
 									  Math.random() / 30, 2, asteroidHP);
 			addAsteroid(a);
 		}
+		
+		player.spawn();
 		
 	}
 
