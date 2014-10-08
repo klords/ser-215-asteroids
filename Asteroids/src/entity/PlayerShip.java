@@ -117,8 +117,8 @@ public class PlayerShip implements Drawable {
 	private void shoot() {
 		if (missiles.size() < maxMissiles) {
 			Missile m = new Missile(this, 
-									new double[] {x + 9, y},
-									new double[] {(velocity[0] * .5)+(14 * Math.cos(Math.toRadians(angle - 90))), (velocity[1] * .5) +(14 * Math.sin(Math.toRadians(angle - 90)))});
+									new double[] {(x + 8) + (Math.cos(Math.toRadians(angle - 90)) * 27), (y + 16) + (Math.sin(Math.toRadians(angle - 90)) * 27)},
+									new double[] {(velocity[0] * 1.15)+(14 * Math.cos(Math.toRadians(angle - 90))), (velocity[1] * 1.15) +(14 * Math.sin(Math.toRadians(angle - 90)))});
 			missiles.add(m);
 		}
 		
@@ -188,7 +188,7 @@ public class PlayerShip implements Drawable {
 			g.drawImage(drawImage, (int) x, (int) (y - GamePanel.HEIGHT), null);
 			g.setTransform(temp);
 		}
-		if (x < 0 && x > -10) {
+		if (x < 10 && x > -10) {
 			at = AffineTransform.getRotateInstance(Math.toRadians(angle), (int) x + GamePanel.WIDTH + (width / 2), y + (height / 2));
 			g.transform(at);
 			g.drawImage(drawImage, (int) (GamePanel.WIDTH + x), (int) y, null);
