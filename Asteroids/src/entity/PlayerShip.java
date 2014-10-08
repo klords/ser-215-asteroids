@@ -43,7 +43,6 @@ public class PlayerShip implements Drawable {
 	private boolean isDead;
 	
 	//missile
-	private boolean isFiring;
 	private int missileDamage;
 	private ArrayList<Missile> missiles;
 	private int maxMissiles;
@@ -63,6 +62,7 @@ public class PlayerShip implements Drawable {
 	
 	
 	public PlayerShip(){
+		lives = 3;
 		width = 32;
 		height = 48;
 		accelSpeed = 0.2;
@@ -72,6 +72,7 @@ public class PlayerShip implements Drawable {
 		velocity = new double[] {0, 0};
 		currentShip = 0;
 		maxMissiles = 3;
+		missileDamage = 1;
 		missiles = new ArrayList<Missile>();
 		
 		x = GamePanel.WIDTH / 2 - (width / 2);
@@ -103,6 +104,10 @@ public class PlayerShip implements Drawable {
 		
 	}
 	
+	public int getLives() {
+		return lives;
+	}
+	
 	public void setAccelerating(boolean b){
 		if (b && !isAccelerating) {
 			isAccelerating = b;
@@ -112,20 +117,6 @@ public class PlayerShip implements Drawable {
 		else if (!b && isAccelerating) {
 			isAccelerating = b;
 		}
-	}
-	
-	private void shoot() {
-		if (missiles.size() < maxMissiles) {
-			Missile m = new Missile(this, 
-									new double[] {(x + 8) + (Math.cos(Math.toRadians(angle - 90)) * 27), (y + 16) + (Math.sin(Math.toRadians(angle - 90)) * 27)},
-									new double[] {(velocity[0] * 1.15)+(14 * Math.cos(Math.toRadians(angle - 90))), (velocity[1] * 1.15) +(14 * Math.sin(Math.toRadians(angle - 90)))});
-			missiles.add(m);
-		}
-		
-	}
-	
-	public void removeMissile(Missile m) {
-		missiles.remove(m);
 	}
 	
 	public void update(){
@@ -220,6 +211,21 @@ public class PlayerShip implements Drawable {
 		if (k == KeyEvent.VK_LEFT && angularVelocity == -6) angularVelocity = 0;
 		if (k == KeyEvent.VK_RIGHT && angularVelocity == 6) angularVelocity = 0;
 		if (k == KeyEvent.VK_UP) setAccelerating(false);
+	}
+
+	private void shoot() {
+		if (missiles.size() < maxMissiles) {
+			Missile m = new Missile(this, 
+									new double[] {(x + 8) + (Math.cos(Math.toRadians(angle - 90)) * 27), (y + 16) + (Math.sin(Math.toRadians(angle - 90)) * 27)},
+									new double[] {(velocity[0] * 1.15)+(14 * Math.cos(Math.toRadians(angle - 90))), (velocity[1] * 1.15) +(14 * Math.sin(Math.toRadians(angle - 90)))},
+									missileDamage);
+			missiles.add(m);
+		}
+		
+	}
+
+	public void removeMissile(Missile m) {
+		missiles.remove(m);
 	}
 	
 }
