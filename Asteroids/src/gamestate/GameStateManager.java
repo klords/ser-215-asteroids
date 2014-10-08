@@ -13,15 +13,15 @@ public class GameStateManager {
 	public static final int LEVEL3STATE=3;
 	public static final int LEVEL4STATE=4;
 	public static final int LEVEL5STATE=5;
+	public static final int HIGHSCORESTATE=6;
 	
 	private ArrayList<GameState> states;
-	//private static ActionListener actListener;
 	private int currentState;
 	
 	public GameStateManager(){
 		states = new ArrayList<GameState>();
 		
-		currentState = LEVEL1STATE; //MENUSTATE;
+		currentState = MENUSTATE;
 		
 		states.add(new MenuState(this));
 		states.add(new Level1State(this));
