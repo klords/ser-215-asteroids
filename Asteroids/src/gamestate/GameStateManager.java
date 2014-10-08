@@ -1,9 +1,9 @@
 package gamestate;
 
 import java.awt.Graphics2D;
-//import java.awt.event.ActionListener;
-//import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import entity.PlayerShip;
 
 public class GameStateManager {
 	
@@ -15,35 +15,49 @@ public class GameStateManager {
 	public static final int LEVEL5STATE=5;
 	public static final int HIGHSCORESTATE=6;
 	
+	private ArrayList<PlayerShip> players;
+	private int currentPlayer;
 	private ArrayList<GameState> states;
 	private int currentState;
 	
 	public GameStateManager(){
-		states = new ArrayList<GameState>();
 		
+		players = new ArrayList<PlayerShip>();
+		currentPlayer = 0;
+		
+		players.add(new PlayerShip());
+		
+		states = new ArrayList<GameState>();
 		currentState = MENUSTATE;
 		
 		states.add(new MenuState(this));
-		states.add(new Level1State(this));
+		states.add(new Level1State(this, players.get(currentPlayer)));
+		
+	}
+	
+	public void setState(int gs){
+		currentState = gs;
+		states.get(currentState).init();
+	}
+	
+	public void init() {
+		states.get(currentState).init();
+	}
+	
+	public void update(){
+		states.get(currentState).update();
+	}
+	
+	public void draw(Graphics2D g){
+		states.get(currentState).draw(g);
 	}
 	
 	public void keyPressed(int k){
 		states.get(currentState).keyPressed(k);
 	}
+	
 	public void keyReleased(int k){
 		states.get(currentState).keyReleased(k);
 	}
-	public void update(){
-		states.get(currentState).update();
-	}
-	public void setState(int gs){
-		currentState = gs;
-		states.get(currentState).init();
-	}
-	public void draw(Graphics2D g){
-		states.get(currentState).draw(g);
-	}
-
-	public void init() {}
-
+	
 }
