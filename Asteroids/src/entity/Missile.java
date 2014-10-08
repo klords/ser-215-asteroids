@@ -14,12 +14,14 @@ public class Missile extends MapObject {
 	private int lifespan;
 	private long lifeTimer;
 	private PlayerShip player;
+	private int damage;
 
-    public Missile(PlayerShip player, double[] position, double[] velocity) {
+    public Missile(PlayerShip player, double[] position, double[] velocity, int missileDamage) {
     	lifespan = 500;
     	angularVelocity = 0;
     	this.position = position;
     	this.velocity = velocity;
+    	damage = missileDamage;
     	lifeTimer = System.nanoTime();
     	this.player = player;
     	try {
