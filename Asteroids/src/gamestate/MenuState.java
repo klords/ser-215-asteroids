@@ -24,6 +24,7 @@ public class MenuState extends GameState{
 		this.gsm = gsm;
 		
 		try {
+			
 			mainbg = new Images("/resources/backgrounds/mainbg.png");
 			debrisField = new DebrisField();
 			
@@ -41,7 +42,7 @@ public class MenuState extends GameState{
 									 new Images("/resources/backgrounds/exitButtonFade.png")};
 			exitGame[0].setPosition((GamePanel.WIDTH / 2) - (exitGame[0].getWidth() / 2), 385);
 			exitGame[1].setPosition((GamePanel.WIDTH / 2) - (exitGame[1].getWidth() / 2), 385);
-			init();
+			
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -91,10 +92,12 @@ public class MenuState extends GameState{
 		// draw quit button
 		if (currentChoice == 2) exitGame[0].draw(g);
 		else exitGame[1].draw(g);
+		
 	}
 	
 	@Override
 	public void keyPressed(int k) {
+		
 		switch (k) {
 			case KeyEvent.VK_UP:
 				if (--currentChoice < 0) currentChoice = 2;
@@ -104,9 +107,9 @@ public class MenuState extends GameState{
 				break;
 			case KeyEvent.VK_ENTER:
 				selection();
-				System.out.println("You shouldn't see this. See menustate keyhandler if you can.");
 				return;
 		}
+		
 	}
 	
 	@Override

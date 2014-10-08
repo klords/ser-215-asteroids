@@ -62,6 +62,7 @@ public class Asteroid extends MapObject {
     public void draw(Graphics2D g) {
     	super.draw(g);
     	AffineTransform temp = g.getTransform();
+    	if (at == null) update();
     	g.transform(at);
     	g.drawImage(image, (int)position[0], (int)position[1], null);
     	g.setTransform(temp);
