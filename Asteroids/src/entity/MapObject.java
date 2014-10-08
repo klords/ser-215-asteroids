@@ -1,7 +1,6 @@
 package entity;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -68,9 +67,9 @@ public abstract class MapObject implements Drawable {
 		}
 		
 		if (position[0] < 0) position[0] = GamePanel.WIDTH - position[0];
-		else position[0] %= GamePanel.WIDTH;
+		else if (position[0] > GamePanel.WIDTH) position[0] = position[0] - GamePanel.WIDTH;
 		if (position[1] < 0) position[1] = GamePanel.HEIGHT - position[1];
-		else position[1] %= GamePanel.HEIGHT;
+		else if (position[1] > GamePanel.HEIGHT) position[1] = position[1] - GamePanel.HEIGHT;
 		
  	}
 	

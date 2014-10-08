@@ -2,10 +2,8 @@ package gamestate;
 
 import java.awt.Graphics2D;
 
-import entity.Asteroid;
 import entity.PlayerShip;
 import tilemap.Images;
-import main.GamePanel;
 
 
 public class Level1State extends LevelState {
@@ -15,6 +13,7 @@ public class Level1State extends LevelState {
 		super(gsm, player);
 		
 		numAsteroids = 3;
+		asteroidHP = 1;
 		
 		try {
 			bg = new Images("/resources/backgrounds/level1bg.png");
@@ -28,15 +27,9 @@ public class Level1State extends LevelState {
 	@Override
 	public void init() {
 		
-		super.init();
+		player.setState(this);
 		
-		for (int i = 0; i < numAsteroids; i++) {
-			Asteroid a = new Asteroid(this, 
-									  new double[] {Math.random() * GamePanel.WIDTH, Math.random() * GamePanel.HEIGHT}, 
-									  new double[] {Math.random(), Math.random()}, 
-									  Math.random() / 30);
-			asteroids.add(a);
-		}
+		super.init();
 		
 	}
 	

@@ -17,4 +17,22 @@ public class Enemy extends Entity {
     public void setValue(int value) {
         this.value = value;
     }
+
+	@Override
+	public void thrust() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void turn(int a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void shoot() {
+		// TODO Auto-generated method stub
+		
+	}
 }

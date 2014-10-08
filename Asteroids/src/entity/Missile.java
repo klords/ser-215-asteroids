@@ -1,7 +1,6 @@
 package entity;
 
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -23,6 +22,7 @@ public class Missile extends MapObject {
     	this.velocity = velocity;
     	damage = missileDamage;
     	lifeTimer = System.nanoTime();
+    	radius = 6;
     	this.player = player;
     	try {
 			image = ImageIO.read(getClass().getResourceAsStream("/resources/missiles/normalMissile.png"));
@@ -41,6 +41,20 @@ public class Missile extends MapObject {
     
     public void update() {
     	super.update();
+    	
+    	double X = position[0] + radius;
+    	double Y = position[1] + radius;
+    	
+    	for (int i = 0; i < player.getState().getAsteroids().size(); i++) {
+    		Asteroid a = player.getState().getAsteroids().get(i);
+    		double aX = a.position[0] + a.radius;
+    		double aY = a.position[1] + a.radius;
+    		if (PlayerShip.getDistance(X, Y, aX, aY) <= a.getRadius() + radius) {
+    			a.hit(damage);
+    			player.removeMissile(this);
+    		}
+    	}
+    	
     	if ((System.nanoTime() - lifeTimer) / 1000000 > lifespan) {
     		player.removeMissile(this);
     	}

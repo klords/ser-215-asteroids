@@ -6,29 +6,34 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import gamestate.GameState;
-import gamestate.Level1State;
+import gamestate.LevelState;
 
 /**
  * Created by gareth on 10/4/14.
  */
 public class Asteroid extends MapObject {
+	
+	private int durability;
     private int size;
     private int value;
     private AffineTransform at;
-    private Level1State state;
+    private LevelState state;
 
-    public Asteroid(Level1State state, double[] position, double[] velocity,
-    				double angularVelocity) {
-    	width = 32;
-    	height = 32;
+    public Asteroid(LevelState state, double[] position, double[] velocity,
+    				double angularVelocity, int size, int durability) {
     	angle = Math.random() * (2 * Math.PI);
     	this.angularVelocity = angularVelocity;
     	this.state = state;
     	this.position = position;
     	this.velocity = velocity;
+    	this.size = size;
+    	if (size == 2) radius = 32;
+    	else radius = 16;
     	try {
-			image = ImageIO.read(getClass().getResourceAsStream("/resources/asteroids/asteroidLarge2.png"));
+			String img;
+			if (size == 2) img = "/resources/asteroids/asteroidLarge2.png";
+			else img = "/resources/asteroids/asteroidSmall2.png";
+    		image = ImageIO.read(getClass().getResourceAsStream(img));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -50,21 +55,41 @@ public class Asteroid extends MapObject {
         this.value = value;
     }
     
-    public void remove() {
-    	state.removeAsteroid(this);
-    }
-    
     public void update() {
     	super.update();
-    	at = AffineTransform.getRotateInstance(angle, position[0] + width, position[1] + height);
+    	at = AffineTransform.getRotateInstance(angle, position[0] + radius, position[1] + radius);
     }
     
     public void draw(Graphics2D g) {
     	super.draw(g);
-    	AffineTransform temp = g.getTransform();
+    	Graphics2D g2 = (Graphics2D) g.create();
+    	//AffineTransform temp = g.getTransform();
     	if (at == null) update();
-    	g.transform(at);
-    	g.drawImage(image, (int)position[0], (int)position[1], null);
-    	g.setTransform(temp);
+    	g2.transform(at);
+    	g2.drawImage(image, (int)position[0], (int)position[1], null);
+    	//g.setTransform(temp);
+    	g2.dispose();
     }
+
+    public void hit(int damage) {
+    	durability -= damage;
+    	if (durability <= 0) {
+    		remove();
+    	}
+    }
+    
+	private void remove() {
+		if (size > 1) {
+			for (int i = 0; i < 2; i++) {
+				double rand = (Math.random() * 4 - 2);
+				state.addAsteroid(state, 
+								  new double[] {position[0], position[1]}, 
+								  new double[] {rand * velocity[0], 
+												rand * velocity[1]}, 
+								  rand * angularVelocity, 
+								  (size - 1), 
+								  1);			}
+		}
+		state.removeAsteroid(this);
+	}
 }

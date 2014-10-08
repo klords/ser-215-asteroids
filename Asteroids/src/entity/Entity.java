@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by gareth on 10/4/14.
  */
-public class Entity extends MapObject {
+public abstract class Entity extends MapObject {
     private double fireRate;
     private ArrayList<Missile> missiles;
     private double turnSpeed;
@@ -101,15 +101,9 @@ public class Entity extends MapObject {
         this.normalFiring = normalFiring;
     }
 
-    public void thrust() {
+    public abstract void thrust();
 
-    }
+    public abstract void turn(int a);
 
-    public void turn() {
-
-    }
-
-    public void shoot() {
-
-    }
+    public abstract void shoot();
 }

@@ -3,6 +3,7 @@ package gamestate;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import main.GamePanel;
 import tilemap.DebrisField;
 import tilemap.Images;
 import entity.Asteroid;
@@ -17,6 +18,7 @@ public abstract class LevelState extends GameState {
 	protected ArrayList<Enemy> enemies;
 	protected ArrayList<Asteroid> asteroids;
 	protected int numAsteroids;
+	protected int asteroidHP;
 	
 	public LevelState(GameStateManager gsm, PlayerShip player) {
 	
@@ -28,8 +30,26 @@ public abstract class LevelState extends GameState {
 		enemies = new ArrayList<Enemy>();
 	}
 
+	public GameStateManager getGSM() {
+		return gsm;
+	}
+	
 	@Override
-	public void init() {}
+	public void init() {
+		
+		for (int i = 0; i < numAsteroids; i++) {
+			double newX = Math.random() * GamePanel.WIDTH;
+			while (newX > (GamePanel.WIDTH / 3) && newX < (2 * GamePanel.WIDTH / 3)) newX = Math.random() * GamePanel.WIDTH;
+			double newY = Math.random() * GamePanel.HEIGHT;
+			while (newY > (GamePanel.HEIGHT / 3) && newY < (2 * GamePanel.HEIGHT / 3)) newY = Math.random() * GamePanel.HEIGHT; 
+			Asteroid a = new Asteroid(this, 
+									  new double[] {Math.random() * GamePanel.WIDTH, Math.random() * GamePanel.HEIGHT}, 
+									  new double[] {Math.random(), Math.random()}, 
+									  Math.random() / 30, 2, asteroidHP);
+			addAsteroid(a);
+		}
+		
+	}
 
 	@Override
 	public void update() {
@@ -46,6 +66,16 @@ public abstract class LevelState extends GameState {
 		
 		// update player
 		player.update();
+		
+		if (player.getDead()) {
+			if (player.getLives() <= 0) {
+				//game over
+				gsm.setState(GameStateManager.MENUSTATE);
+			}
+			else {
+				player.spawn();
+			}
+		}
 		
 	}
 
@@ -80,6 +110,25 @@ public abstract class LevelState extends GameState {
 		player.keyReleased(k);
 	}
 
+	public ArrayList<Asteroid> getAsteroids() {
+		return asteroids;
+	}
+	
+	public void addAsteroid(Asteroid a) {
+		asteroids.add(a);
+	}
+	
+	public void addAsteroid(LevelState state, double[] position, 
+							double[] velocity, double angularVelocity, 
+							int size, int asteroidHP) {
+		asteroids.add(new Asteroid(state, 
+								   position, 
+								   velocity, 
+								   angularVelocity, 
+								   size, 
+								   asteroidHP));
+	}
+	
 	public void removeAsteroid(Asteroid a) {
 		asteroids.remove(a);
 	}
