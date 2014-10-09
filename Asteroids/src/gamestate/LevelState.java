@@ -7,8 +7,8 @@ import java.util.Random;
 import main.GamePanel;
 import tilemap.DebrisField;
 import tilemap.Images;
-import enemies.Enemy;
 import entity.Asteroid;
+import entity.Enemy;
 import entity.PlayerShip;
 
 public abstract class LevelState extends GameState {
@@ -59,15 +59,8 @@ public abstract class LevelState extends GameState {
 			addAsteroid(a);
 		}
 		for (int i =0;i < numEnemies;i++){
-			Enemy a = new Enemy(this, 
-					  new double[] {Math.random() * GamePanel.WIDTH, Math.random() * GamePanel.HEIGHT}, 
-					  new double[] {Math.random(), Math.random()}, 
-					  Math.random() / 30, 2, enemyHP);
-			Enemy b = new Enemy(this, 
-					  new double[] {Math.random() * GamePanel.WIDTH, Math.random() * GamePanel.HEIGHT}, 
-					  new double[] {Math.random(), Math.random()}, 
-					  Math.random() / 30, 2, infectedEnemyHP);
-			addEnemy(a,b);
+			Enemy a = new Enemy(this);
+			addEnemy(a);
 		}
 		
 		player.spawn();
@@ -140,16 +133,8 @@ public abstract class LevelState extends GameState {
 	public void addAsteroid(Asteroid a) {
 		asteroids.add(a);
 	}
-	public void addEnemy(Enemy a, Enemy b){
-		int max = 100;
-		int min = 0;
-		int i = rand.nextInt(((max-min)+1)+min);
-		if (i>max/4){	//adds a common alien based upon 75% success rate
-			enemies.add(a);
-		}
-		if (i<max/4){ //adds an infected alien based upon 25% success rate
-			enemies.add(b);
-		}
+	public void addEnemy(Enemy a){
+		enemies.add(a);
 	}
 	
 	public void addAsteroid(LevelState state, double[] position, 

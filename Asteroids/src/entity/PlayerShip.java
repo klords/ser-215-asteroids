@@ -102,6 +102,8 @@ public class PlayerShip extends Entity {
 
 	public void update(){
 		
+		System.out.println(currentState);
+		
 		super.update();
 		
 		if (isSpawning) {

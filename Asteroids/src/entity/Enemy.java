@@ -1,13 +1,22 @@
 package entity;
 
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import gamestate.LevelState;
+
 /**
  * Created by gareth on 10/4/14.
  */
 public class Enemy extends Entity {
-    private int value;
+    
+	//AI timers
+	private long shootTimer;
+	private long velTimer;
+	
+	private int value;
 
-    public Enemy() {
-
+    public Enemy(LevelState levelState) {
+    	currentState = levelState;
     }
 
     public int getValue() {
@@ -18,18 +27,17 @@ public class Enemy extends Entity {
         this.value = value;
     }
 
-	@Override
-	public void thrust(boolean b) {
-		
-	}
 
-	@Override
 	public void turn(int a) {
 		
 	}
 
-	@Override
 	public void shoot() {
+		
+	}
+
+	@Override
+	protected void thrust(boolean b) {
 		
 	}
 }
