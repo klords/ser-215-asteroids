@@ -11,6 +11,8 @@ import gamestate.GameStateManager;
 
 import javax.swing.JPanel;
 
+import main.Drawable;
+
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel 
 					   implements Runnable, KeyListener, Drawable {

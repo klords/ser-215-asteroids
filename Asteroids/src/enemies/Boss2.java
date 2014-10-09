@@ -1,6 +1,5 @@
 package enemies;
 
-import entity.Enemy;
 
 /**
  * Created by gareth on 10/6/14.
