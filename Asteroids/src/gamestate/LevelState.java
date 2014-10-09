@@ -74,7 +74,7 @@ public abstract class LevelState extends GameState {
 		// update player
 		player.update();
 		
-		if (player.getDead()) {
+		if (player.isDead()) {
 			if (player.getLives() <= 0) {
 				//game over
 				gsm.setState(GameStateManager.MENUSTATE);

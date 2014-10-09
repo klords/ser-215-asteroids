@@ -19,20 +19,17 @@ public class Enemy extends Entity {
     }
 
 	@Override
-	public void thrust() {
-		// TODO Auto-generated method stub
+	public void thrust(boolean b) {
 		
 	}
 
 	@Override
 	public void turn(int a) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void shoot() {
-		// TODO Auto-generated method stub
 		
 	}
 }

@@ -11,11 +11,11 @@ public abstract class MapObject implements Drawable {
 	
 	protected int width;
 	protected int height;
+	protected int radius;
 	protected double velocity[];
 	protected double angle;
 	protected double angularVelocity;
 	protected double[] position;
-	protected double radius;
 	protected BufferedImage image;
 	protected AffineTransform at;
 
@@ -51,11 +51,11 @@ public abstract class MapObject implements Drawable {
 		this.position = position;
 	}
 	
-	public double getRadius() {
+	public int getRadius() {
 		return radius;
 	}
 	
-	public void setRadius(double radius) {
+	public void setRadius(int radius) {
 		this.radius = radius;
 	}
 	

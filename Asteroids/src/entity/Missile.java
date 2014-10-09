@@ -12,17 +12,17 @@ public class Missile extends MapObject {
     
 	private int lifespan;
 	private long lifeTimer;
-	private PlayerShip player;
+	private Entity entity;
 	private int damage;
 
-    public Missile(PlayerShip player, double[] position, double[] velocity, int missileDamage) {
+    public Missile(Entity entity, double[] position, double[] velocity, int missileDamage) {
     	lifespan = 500;
     	angularVelocity = 0;
     	this.position = position;
     	this.velocity = velocity;
     	damage = missileDamage;
     	lifeTimer = System.nanoTime();
-    	this.player = player;
+    	this.entity = entity;
     	try {
 			image = ImageIO.read(getClass().getResourceAsStream("/resources/missiles/normalMissile.png"));
 		} catch (IOException e) {
@@ -42,18 +42,18 @@ public class Missile extends MapObject {
     public void update() {
     	super.update();
     	
-    	for (int i = 0; i < player.getState().getAsteroids().size(); i++) {
-    		Asteroid a = player.getState().getAsteroids().get(i);
+    	for (int i = 0; i < entity.getState().getAsteroids().size(); i++) {
+    		Asteroid a = entity.getState().getAsteroids().get(i);
     		double aX = a.position[0];
     		double aY = a.position[1];
-    		if (PlayerShip.getDistance(position[0], position[1], aX, aY) <= (a.getRadius() + radius)) {
+    		if (Entity.getDistance(position[0], position[1], aX, aY) <= (a.getRadius() + radius)) {
     			a.hit(damage);
-    			player.removeMissile(this);
+    			entity.removeMissile(this);
     		}
     	}
     	
     	if ((System.nanoTime() - lifeTimer) / 1000000 > lifespan) {
-    		player.removeMissile(this);
+    		entity.removeMissile(this);
     	}
     }
     
