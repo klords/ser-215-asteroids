@@ -47,7 +47,6 @@ public abstract class LevelState extends GameState {
 			while (newX > (GamePanel.WIDTH / 4) && newX < (3 * GamePanel.WIDTH / 4)) newX = Math.random() * GamePanel.WIDTH;
 			double newY = Math.random() * GamePanel.HEIGHT;
 			while (newY > (GamePanel.HEIGHT / 4) && newY < (3 * GamePanel.HEIGHT / 4)) newY = Math.random() * GamePanel.HEIGHT; 
-			System.out.println("newX: " + newX + " | newY: " + newY);
 			Asteroid a = new Asteroid(this, 
 									  new double[] {Math.random() * GamePanel.WIDTH, Math.random() * GamePanel.HEIGHT}, 
 									  new double[] {Math.random(), Math.random()}, 
