@@ -36,12 +36,21 @@ public class GameStateManager {
 		
 		states.add(new MenuState(this));
 		states.add(new Level1State(this, players.get(currentPlayer)));
+		states.add(new Level1State(this, players.get(currentPlayer)));
+		states.add(new Level1State(this, players.get(currentPlayer)));
+		states.add(new Level1State(this, players.get(currentPlayer)));
+		states.add(new Level1State(this, players.get(currentPlayer)));
+		states.add(new HighScoreState(this));
 		
 	}
 	
 	public void setState(int gs){
 		currentState = gs;
 		states.get(currentState).init();
+	}
+	
+	public GameState getState(int gs) {
+		return states.get(gs);
 	}
 	
 	public void init() {

@@ -47,7 +47,7 @@ public class Missile extends MapObject {
     		double aX = a.position[0];
     		double aY = a.position[1];
     		if (Entity.getDistance(position[0], position[1], aX, aY) <= (a.getRadius() + radius)) {
-    			a.hit(damage);
+    			a.hit(damage, entity);
     			entity.removeMissile(this);
     		}
     	}

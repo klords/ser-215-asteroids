@@ -7,6 +7,7 @@ import java.util.Random;
 import main.GamePanel;
 import tilemap.DebrisField;
 import tilemap.Images;
+import tilemap.HUD;
 import entity.Asteroid;
 import entity.Enemy;
 import entity.PlayerShip;
@@ -14,6 +15,7 @@ import entity.PlayerShip;
 public abstract class LevelState extends GameState {
 
 	protected Images bg;
+	protected HUD hud;
 	protected PlayerShip player;
 	protected DebrisField debrisField;
 	protected ArrayList<Enemy> enemies;
@@ -46,6 +48,7 @@ public abstract class LevelState extends GameState {
 		
 		asteroids = new ArrayList<Asteroid>();
 		enemies = new ArrayList<Enemy>();
+		hud = new HUD(player);
 				
 		for (int i = 0; i < numAsteroids; i++) {
 			double newX = Math.random() * GamePanel.WIDTH;
@@ -113,7 +116,10 @@ public abstract class LevelState extends GameState {
 		
 		// draw player
 		player.draw(g);
-			
+	
+		// draw HUD
+		hud.draw(g);
+		
 	}
 
 	@Override

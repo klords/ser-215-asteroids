@@ -27,8 +27,14 @@ public class Asteroid extends MapObject {
     	this.position = position;
     	this.velocity = velocity;
     	this.size = size;
-    	if (size == 2) radius = 32;
-    	else radius = 16;
+    	if (size == 2) {
+    		radius = 32;
+    		value = 1000;
+    	}
+    	else {
+    		radius = 16;
+    		value = 500;
+    	}
     	try {
 			String img;
 			if (size == 2) img = "/resources/asteroids/asteroidLarge2.png";
@@ -73,9 +79,10 @@ public class Asteroid extends MapObject {
     	}
     }
 
-    public void hit(int damage) {
+    public void hit(int damage, Entity e) {
     	durability -= damage;
     	if (durability <= 0) {
+    		e.incScore(this.value);
     		remove();
     	}
     }
