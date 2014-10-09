@@ -20,7 +20,11 @@ public class GameStateManager {
 	private ArrayList<GameState> states;
 	private int currentState;
 	
+	private boolean debugCollision;
+	
 	public GameStateManager(){
+		
+		debugCollision = false;
 		
 		players = new ArrayList<PlayerShip>();
 		currentPlayer = 0;
@@ -58,6 +62,10 @@ public class GameStateManager {
 	
 	public void keyReleased(int k){
 		states.get(currentState).keyReleased(k);
+	}
+
+	public boolean getDebugCollision() {
+		return debugCollision;
 	}
 	
 }

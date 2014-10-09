@@ -32,17 +32,22 @@ public abstract class LevelState extends GameState {
 		return gsm;
 	}
 	
+	public boolean getDebugCollision() {
+		return gsm.getDebugCollision();
+	}
+	
 	@Override
 	public void init() {
 		
 		asteroids = new ArrayList<Asteroid>();
 		enemies = new ArrayList<Enemy>();
-		
+				
 		for (int i = 0; i < numAsteroids; i++) {
 			double newX = Math.random() * GamePanel.WIDTH;
-			while (newX > (GamePanel.WIDTH / 3) && newX < (2 * GamePanel.WIDTH / 3)) newX = Math.random() * GamePanel.WIDTH;
+			while (newX > (GamePanel.WIDTH / 4) && newX < (3 * GamePanel.WIDTH / 4)) newX = Math.random() * GamePanel.WIDTH;
 			double newY = Math.random() * GamePanel.HEIGHT;
-			while (newY > (GamePanel.HEIGHT / 3) && newY < (2 * GamePanel.HEIGHT / 3)) newY = Math.random() * GamePanel.HEIGHT; 
+			while (newY > (GamePanel.HEIGHT / 4) && newY < (3 * GamePanel.HEIGHT / 4)) newY = Math.random() * GamePanel.HEIGHT; 
+			System.out.println("newX: " + newX + " | newY: " + newY);
 			Asteroid a = new Asteroid(this, 
 									  new double[] {Math.random() * GamePanel.WIDTH, Math.random() * GamePanel.HEIGHT}, 
 									  new double[] {Math.random(), Math.random()}, 
@@ -100,7 +105,7 @@ public abstract class LevelState extends GameState {
 		
 		// draw player
 		player.draw(g);
-		
+			
 	}
 
 	@Override

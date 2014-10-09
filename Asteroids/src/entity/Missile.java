@@ -22,13 +22,13 @@ public class Missile extends MapObject {
     	this.velocity = velocity;
     	damage = missileDamage;
     	lifeTimer = System.nanoTime();
-    	radius = 6;
     	this.player = player;
     	try {
 			image = ImageIO.read(getClass().getResourceAsStream("/resources/missiles/normalMissile.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    	radius = image.getWidth() / 2;
     }
 
     public int getLifespan() {
@@ -42,14 +42,11 @@ public class Missile extends MapObject {
     public void update() {
     	super.update();
     	
-    	double X = position[0] + radius;
-    	double Y = position[1] + radius;
-    	
     	for (int i = 0; i < player.getState().getAsteroids().size(); i++) {
     		Asteroid a = player.getState().getAsteroids().get(i);
-    		double aX = a.position[0] + a.radius;
-    		double aY = a.position[1] + a.radius;
-    		if (PlayerShip.getDistance(X, Y, aX, aY) <= a.getRadius() + radius) {
+    		double aX = a.position[0];
+    		double aY = a.position[1];
+    		if (PlayerShip.getDistance(position[0], position[1], aX, aY) <= (a.getRadius() + radius)) {
     			a.hit(damage);
     			player.removeMissile(this);
     		}
@@ -62,7 +59,7 @@ public class Missile extends MapObject {
     
     public void draw(Graphics2D g) {
     	super.draw(g);
-		g.drawImage(image, (int)position[0], (int)position[1], null);
+		g.drawImage(image, (int)(position[0] - radius), (int)(position[1] - radius), null);
     }
     
 }

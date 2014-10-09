@@ -71,6 +71,7 @@ public class PlayerShip implements Drawable {
 		lives = 3;
 		width = 32;
 		height = 48;
+		radius = width / 2;
 		accelSpeed = 0.2;
 		angle = 0;
 		angularVelocity = 0;
@@ -161,8 +162,8 @@ public class PlayerShip implements Drawable {
 	private void shoot() {
 		if (missiles.size() < maxMissiles) {
 			Missile m = new Missile(this, 
-									new double[] {(x + 8) + (Math.cos(Math.toRadians(angle - 90)) * 27), 
-												  (y + 16) + (Math.sin(Math.toRadians(angle - 90)) * 27)},
+									new double[] {x + (Math.cos(Math.toRadians(angle - 90)) * radius), 
+												  y + (Math.sin(Math.toRadians(angle - 90)) * radius)},
 									new double[] {(velocity[0] * 1.15)+(14 * Math.cos(Math.toRadians(angle - 90))), 
 												  (velocity[1] * 1.15) +(14 * Math.sin(Math.toRadians(angle - 90)))},
 									missileDamage);
@@ -198,10 +199,10 @@ public class PlayerShip implements Drawable {
 		if (!invulnerable) {
 			for (int i = 0; i < currentState.getAsteroids().size(); i++) {
 				Asteroid a = currentState.getAsteroids().get(i);
-				if (PlayerShip.getDistance(x + radius, 
-										   y + radius, 
-										   a.getPosition()[0] + a.getRadius(), 
-										   a.getPosition()[1] + a.getRadius()) 
+				if (PlayerShip.getDistance(x, 
+										   y, 
+										   a.getPosition()[0], 
+										   a.getPosition()[1]) 
 					<= radius + a.getRadius()) {
 					loseLife();
 				}
@@ -255,12 +256,16 @@ public class PlayerShip implements Drawable {
 		
 		// draw actual ship with rotation
 		at = AffineTransform.getRotateInstance(Math.toRadians(angle), 
-											   x + (width / 2), 
-											   y + (height / 2));
+											   x, 
+											   y);
 		AffineTransform temp = g.getTransform();	// backup original transform
 		g.transform(at);							// transform graphics context to rotate image
 		if (!(isSpawning && ((((System.nanoTime() - spawnTimer) / 1000000) % 250) <= 125))) {
-			g.drawImage(drawImage, (int) x, (int) y, null);
+			g.drawImage(drawImage, (int)(x - radius), (int)(y - radius), null);
+		}
+		if (currentState.getDebugCollision()) {
+			g.drawOval((int)(x - radius), (int)(y - radius), (radius * 2), (radius * 2));
+			g.drawRect((int)x, (int)y, 1, 1);
 		}
 		g.setTransform(temp);						// set transform back to original
 		
@@ -270,7 +275,7 @@ public class PlayerShip implements Drawable {
 												   (int) x + (width / 2), 
 												   y + GamePanel.HEIGHT + (height / 2));
 			g.transform(at);
-			g.drawImage(drawImage, (int) x, (int) (GamePanel.HEIGHT + y), null);
+			g.drawImage(drawImage, (int) x - radius, (int) (GamePanel.HEIGHT + y) - radius, null);
 			g.setTransform(temp); 
 		}
 		else if (y > GamePanel.HEIGHT - height && y < GamePanel.HEIGHT - 10) {
@@ -278,7 +283,7 @@ public class PlayerShip implements Drawable {
 												   (int) x + (width / 2), 
 												   y - GamePanel.HEIGHT + (height / 2));
 			g.transform(at);
-			g.drawImage(drawImage, (int) x, (int) (y - GamePanel.HEIGHT), null);
+			g.drawImage(drawImage, (int) x - radius, (int) (y - GamePanel.HEIGHT) - radius, null);
 			g.setTransform(temp);
 		}
 		if (x < 10 && x > -10) {
@@ -286,7 +291,7 @@ public class PlayerShip implements Drawable {
 												   (int) x + GamePanel.WIDTH + (width / 2), 
 												   y + (height / 2));
 			g.transform(at);
-			g.drawImage(drawImage, (int) (GamePanel.WIDTH + x), (int) y, null);
+			g.drawImage(drawImage, (int) (GamePanel.WIDTH + x) - radius, (int) y - radius, null);
 			g.setTransform(temp);
 		}
 		else if (x > GamePanel.WIDTH - height && x < GamePanel.WIDTH) {
@@ -294,7 +299,7 @@ public class PlayerShip implements Drawable {
 												   (int) x - GamePanel.WIDTH + (width / 2), 
 												   y + (height / 2));
 			g.transform(at);
-			g.drawImage(drawImage, (int) (x - GamePanel.WIDTH), (int) y, null);
+			g.drawImage(drawImage, (int) (x - GamePanel.WIDTH) - radius, (int) y - radius, null);
 			g.setTransform(temp);
 		}
 		

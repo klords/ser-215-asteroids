@@ -57,7 +57,7 @@ public class Asteroid extends MapObject {
     
     public void update() {
     	super.update();
-    	at = AffineTransform.getRotateInstance(angle, position[0] + radius, position[1] + radius);
+    	at = AffineTransform.getRotateInstance(angle, position[0], position[1]);
     }
     
     public void draw(Graphics2D g) {
@@ -65,8 +65,12 @@ public class Asteroid extends MapObject {
     	AffineTransform temp = g.getTransform();
     	if (at == null) update();
     	g.transform(at);
-    	g.drawImage(image, (int)position[0], (int)position[1], null);
+    	g.drawImage(image, (int)(position[0] - radius), (int)(position[1] - radius), null);
     	g.setTransform(temp);
+    	if (state.getDebugCollision()) {
+    		g.drawRect((int)position[0], (int)position[1], 1, 1);
+    		g.drawOval((int)(position[0] - radius), (int)(position[1] - radius), (int)(radius * 2), (int)(radius * 2));
+    	}
     }
 
     public void hit(int damage) {
