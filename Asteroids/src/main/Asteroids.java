@@ -2,6 +2,8 @@ package main;
 
 import javax.swing.JFrame;
 
+import main.GamePanel;
+
 public class Asteroids {
 
 	public static void main(String[] args) {

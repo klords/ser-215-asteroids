@@ -14,6 +14,9 @@ public class Level1State extends LevelState {
 		
 		numAsteroids = 3;
 		asteroidHP = 1;
+		numEnemies = 2;
+		enemyHP = 2;
+		infectedEnemyHP = 3;
 		
 		try {
 			bg = new Images("/resources/backgrounds/level1bg.png");
