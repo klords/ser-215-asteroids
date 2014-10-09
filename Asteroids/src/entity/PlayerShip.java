@@ -104,8 +104,6 @@ public class PlayerShip extends Entity {
 
 	public void update(){
 		
-		System.out.println(currentState);
-		
 		super.update();
 		
 		if (isSpawning) {
@@ -116,10 +114,10 @@ public class PlayerShip extends Entity {
 		}
 		
 		// check if completely off-screen, place appropriately
-		if (x <= -10) x = GamePanel.WIDTH + x;
-		else if (x >= GamePanel.WIDTH) x = x - GamePanel.WIDTH;
-		if (y <= -20) y = GamePanel.HEIGHT + y;
-		else if (y >= GamePanel.HEIGHT - 10) y = y - GamePanel.HEIGHT;
+		if (x <= -width) x = GamePanel.WIDTH + x;
+		else if (x >= GamePanel.WIDTH + width) x = x - GamePanel.WIDTH;
+		if (y <= -width) y = GamePanel.HEIGHT + y;
+		else if (y >= GamePanel.HEIGHT + width) y = y - GamePanel.HEIGHT;
 		
 		// calculate new velocity with friction
 		velocity[0] *= (1 - friction);
@@ -167,34 +165,34 @@ public class PlayerShip extends Entity {
 		g.setTransform(temp);						// set transform back to original
 		
 		// draw additional ship image for seamless wrap-around effect
-		if (y < 0 && y > -20) {
+		if (y < radius && y >= -width) {
 			at = AffineTransform.getRotateInstance(Math.toRadians(angle), 
-												   (int) x + (width / 2), 
-												   y + GamePanel.HEIGHT + (height / 2));
+												   (int) x, 
+												   y + GamePanel.HEIGHT);
 			g.transform(at);
-			g.drawImage(drawImage, (int) x - radius, (int) (GamePanel.HEIGHT + y) - radius, null);
+			g.drawImage(drawImage, (int) (x - radius), (int) ((GamePanel.HEIGHT + y) - radius), null);
 			g.setTransform(temp); 
 		}
-		else if (y > GamePanel.HEIGHT - height && y < GamePanel.HEIGHT - 10) {
+		else if (y > GamePanel.HEIGHT - radius && y <= GamePanel.HEIGHT + width) {
 			at = AffineTransform.getRotateInstance(Math.toRadians(angle), 
-												   (int) x + (width / 2), 
-												   y - GamePanel.HEIGHT + (height / 2));
+												   (int) x, 
+												   y - GamePanel.HEIGHT);
 			g.transform(at);
 			g.drawImage(drawImage, (int) x - radius, (int) (y - GamePanel.HEIGHT) - radius, null);
 			g.setTransform(temp);
 		}
-		if (x < 10 && x > -10) {
+		if (x < radius && x >= -width) {
 			at = AffineTransform.getRotateInstance(Math.toRadians(angle), 
-												   (int) x + GamePanel.WIDTH + (width / 2), 
-												   y + (height / 2));
+												   (int) x + GamePanel.WIDTH, 
+												   y);
 			g.transform(at);
 			g.drawImage(drawImage, (int) (GamePanel.WIDTH + x) - radius, (int) y - radius, null);
 			g.setTransform(temp);
 		}
-		else if (x > GamePanel.WIDTH - height && x < GamePanel.WIDTH) {
+		else if (x > GamePanel.WIDTH - radius && x <= GamePanel.WIDTH + width) {
 			at = AffineTransform.getRotateInstance(Math.toRadians(angle), 
-												   (int) x - GamePanel.WIDTH + (width / 2), 
-												   y + (height / 2));
+												   (int) x - GamePanel.WIDTH, 
+												   y);
 			g.transform(at);
 			g.drawImage(drawImage, (int) (x - GamePanel.WIDTH) - radius, (int) y - radius, null);
 			g.setTransform(temp);
