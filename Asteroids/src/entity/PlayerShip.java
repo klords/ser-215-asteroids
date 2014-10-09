@@ -32,6 +32,7 @@ public class PlayerShip extends Entity {
 	private long spawnTimer;
 	
 	public PlayerShip(){
+		super();
 		lives = 3;
 		width = 32;
 		//height = 48;
@@ -43,9 +44,6 @@ public class PlayerShip extends Entity {
 		velocity = new double[] {0, 0};
 		currentShip = 0;
 		maxMissiles = 3;
-		missileDamage = 1;
-		missiles = new ArrayList<Missile>();
-		invulnerable = false;
 		turnSpeed = 6;
 		
 		x = GamePanel.WIDTH / 2 - radius;
@@ -75,6 +73,10 @@ public class PlayerShip extends Entity {
 			animationArrayList.add(bi);
 		}
 		
+	}
+	
+	public BufferedImage getImage() {
+		return drawImage;
 	}
 	
 	public void spawn() {

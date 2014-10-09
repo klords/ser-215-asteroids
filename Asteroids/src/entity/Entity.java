@@ -31,6 +31,7 @@ public abstract class Entity extends MapObject {
     protected int lives;
     protected int health;
     protected boolean isDead;
+    protected int score;
     
     protected Animation animation;
     
@@ -43,9 +44,13 @@ public abstract class Entity extends MapObject {
     	missileDamage = 1;
 		missiles = new ArrayList<Missile>();
 		invulnerable = false;
-		
+		score = 0;
     }
 
+    public int getScore() {
+    	return score;
+    }
+    
     public double getFireRate() {
         return fireRate;
     }
@@ -201,5 +206,9 @@ public abstract class Entity extends MapObject {
 	
     public static double getDistance(double x1, double y1, double x2, double y2) {
 		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+	}
+
+	public void incScore(int value) {
+		score += value;
 	}
 }
