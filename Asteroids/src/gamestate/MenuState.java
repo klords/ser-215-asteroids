@@ -57,6 +57,7 @@ public class MenuState extends GameState{
 	
 	public void init() {
 		currentChoice = 0;
+        music.loop();
 	}
 	
 	public void selection(){
