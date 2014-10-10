@@ -17,6 +17,7 @@ public class PlayerShip extends Entity {
 	
 	//dup image object for screenwrap effect
 	private BufferedImage drawImage;
+	private BufferedImage icon;
 	
 	//animations
 	private ArrayList<BufferedImage[]> animationArrayList;
@@ -63,6 +64,7 @@ public class PlayerShip extends Entity {
 		}
 		
 		drawImage = image;
+		icon = image;
 		
 		animation = new Animation();
 		animationArrayList = new ArrayList<BufferedImage[]>();
@@ -86,7 +88,7 @@ public class PlayerShip extends Entity {
     }
 	
 	public BufferedImage getImage() {
-		return drawImage;
+		return icon;
 	}
 	
 	public void spawn() {
