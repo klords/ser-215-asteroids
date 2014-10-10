@@ -21,6 +21,7 @@ public class PlayerSelectState extends GameState {
     // fonts
     private Font unselect;
     private Font select;
+    private Font nav;
 
     // background images
     private Images mainbg;
@@ -35,6 +36,7 @@ public class PlayerSelectState extends GameState {
         this.gsm = gsm;
         unselect = new Font("Consolas", Font.PLAIN, 40);
         select = new Font("Consolas", Font.BOLD, 40);
+        nav = new Font("Consolas", Font.PLAIN, 15);
 
         try {
 
@@ -66,7 +68,7 @@ public class PlayerSelectState extends GameState {
 
     @Override
     public void update() {
-
+        debrisField.update();
     }
 
     @Override
@@ -78,6 +80,9 @@ public class PlayerSelectState extends GameState {
         mainbg.draw(g);//draw the background
         debrisField.draw(g);//draw debris field
         title.draw(g);//draw title
+        g.setFont(nav);
+        g.drawString("(ESC) Back", 25, 25);
+        g.drawString("(ENTER) Select", 675, 25);
 
         if (numPlayers==0) {
             g.setFont(select);
@@ -105,6 +110,9 @@ public class PlayerSelectState extends GameState {
                 break;
             case KeyEvent.VK_DOWN:
                 if (++numPlayers > 1) numPlayers = 0;
+                break;
+            case KeyEvent.VK_ESCAPE:
+                gsm.setState(GameStateManager.MENUSTATE);
                 break;
             case KeyEvent.VK_ENTER:
                 selection();
