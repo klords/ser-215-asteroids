@@ -17,9 +17,11 @@ public class GameStateManager {
 	public static final int HIGHSCORESTATE=6;
     public static final int SHIPSELECTSTATE=7;
 	public static final int GAMEOVERSTATE=8;
+    public static final int PLAYERSELECTSTATE=9;
 
 	private ArrayList<PlayerShip> players;
 	private int currentPlayer;
+    private int numPlayers;
 	private ArrayList<GameState> states;
 	private int currentState;
 	private int prevState;
@@ -32,9 +34,8 @@ public class GameStateManager {
 		
 		players = new ArrayList<PlayerShip>();
 		currentPlayer = 0;
-		
-		players.add(new PlayerShip());
-		
+        players.add(new PlayerShip());
+
 		states = new ArrayList<GameState>();
 		
 		states.add(new MenuState(this));
@@ -46,6 +47,7 @@ public class GameStateManager {
 		states.add(new HighScoreState(this));
         states.add(new ShipSelectState(this, players.get(currentPlayer)));
 		states.add(new GameOverState(this));
+        states.add(new PlayerSelectState(this));
 		
 		setState(MENUSTATE);
 		
@@ -57,8 +59,23 @@ public class GameStateManager {
 		init();
 	}
 
-	
-	public GameState getState(int gs) {
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public int getNumPlayers() {
+        return numPlayers;
+    }
+
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+
+    public GameState getState(int gs) {
 		return states.get(gs);
 	}
 	

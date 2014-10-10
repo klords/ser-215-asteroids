@@ -25,6 +25,7 @@ public class Level1State extends LevelState {
 		catch(Exception e){
 			e.printStackTrace();
 		}
+        init();
 		
 	}
 
