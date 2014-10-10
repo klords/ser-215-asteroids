@@ -6,6 +6,7 @@ import java.awt.event.*;
 import entity.Sounds;
 import main.GamePanel;
 import tilemap.DebrisField;
+import tilemap.HUD;
 import tilemap.Images;
 
 public class MenuState extends GameState{
@@ -59,10 +60,10 @@ public class MenuState extends GameState{
 		currentChoice = 0;
         music.loop();
 	}
-	
-	public void selection(){
+
+    public void selection(){
 		if (currentChoice==0){
-			gsm.setState(GameStateManager.LEVEL1STATE);
+			gsm.setState(GameStateManager.SHIPSELECTSTATE);
             music.stop();
 		}
 		if (currentChoice==1){
@@ -77,9 +78,9 @@ public class MenuState extends GameState{
 	
 	@Override
 	public void update() {
-		
+
 		debrisField.update();
-		
+
 	}
 	
 	@Override

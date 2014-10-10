@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 
 import entity.Sounds;
 import main.GamePanel;
+import tilemap.HUD;
 
 public class HighScoreState extends GameState {
 
@@ -56,7 +57,7 @@ public class HighScoreState extends GameState {
         music.loop();
 	}
 
-	@Override
+    @Override
 	public void update() {
 		gsm.getState(GameStateManager.MENUSTATE).update();
 	}

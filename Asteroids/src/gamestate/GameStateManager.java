@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import entity.PlayerShip;
+import tilemap.HUD;
 
 public class GameStateManager {
 	
@@ -14,6 +15,7 @@ public class GameStateManager {
 	public static final int LEVEL4STATE=4;
 	public static final int LEVEL5STATE=5;
 	public static final int HIGHSCORESTATE=6;
+    public static final int SHIPSELECTSTATE=7;
 	
 	private ArrayList<PlayerShip> players;
 	private int currentPlayer;
@@ -41,6 +43,7 @@ public class GameStateManager {
 		states.add(new Level1State(this, players.get(currentPlayer)));
 		states.add(new Level1State(this, players.get(currentPlayer)));
 		states.add(new HighScoreState(this));
+        states.add(new ShipSelectState(this, players.get(currentPlayer)));
 		
 	}
 	
@@ -48,6 +51,7 @@ public class GameStateManager {
 		currentState = gs;
 		states.get(currentState).init();
 	}
+
 	
 	public GameState getState(int gs) {
 		return states.get(gs);

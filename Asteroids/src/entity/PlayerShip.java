@@ -17,6 +17,9 @@ public class PlayerShip extends Entity {
 	
 	//dup image object for screenwrap effect
 	private BufferedImage drawImage;
+
+    //image for lives
+    private BufferedImage livesImage;
 	
 	//animations
 	private ArrayList<BufferedImage[]> animationArrayList;
@@ -63,6 +66,7 @@ public class PlayerShip extends Entity {
 		}
 		
 		drawImage = image;
+        livesImage = image;
 		
 		animation = new Animation();
 		animationArrayList = new ArrayList<BufferedImage[]>();
@@ -81,6 +85,14 @@ public class PlayerShip extends Entity {
 		
 	}
 
+    public int getCurrentShip() {
+        return currentShip;
+    }
+
+    public void setCurrentShip(int currentShip) {
+        this.currentShip = currentShip;
+    }
+
     public Sounds getThrust() {
         return thrust;
     }
@@ -88,8 +100,21 @@ public class PlayerShip extends Entity {
 	public BufferedImage getImage() {
 		return drawImage;
 	}
+
+    public BufferedImage getLivesImage() {
+        return livesImage;
+    }
 	
 	public void spawn() {
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream("/resources/ships/" + shipArray[currentShip] + ".png"));//load the current ship
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        drawImage = image;
+        livesImage = image;
 		isDead = false;
 		spawnTimer = System.nanoTime();
 		invulnerable = isSpawning = true;

@@ -43,6 +43,8 @@ public abstract class LevelState extends GameState {
 	public boolean getDebugCollision() {
 		return gsm.getDebugCollision();
 	}
+
+
 	
 	@Override
 	public void init() {
@@ -51,7 +53,7 @@ public abstract class LevelState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		hud = new HUD(player);
 
-		for (int i = 0; i < numAsteroids; i++) {
+        for (int i = 0; i < numAsteroids; i++) {
 			double newX = Math.random() * GamePanel.WIDTH;
 			while (newX > (GamePanel.WIDTH / 4) && newX < (3 * GamePanel.WIDTH / 4)) newX = Math.random() * GamePanel.WIDTH;
 			double newY = Math.random() * GamePanel.HEIGHT;
@@ -72,9 +74,10 @@ public abstract class LevelState extends GameState {
 		
 	}
 
-	@Override
+    @Override
 	public void update() {
-		
+        hud.update();
+
 		// update debris
 		debrisField.update();
 		
