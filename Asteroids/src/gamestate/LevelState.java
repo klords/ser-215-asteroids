@@ -27,11 +27,14 @@ public abstract class LevelState extends GameState {
 	protected int enemyHP;
 	protected int infectedEnemyHP;
 	protected Random rand;
+	protected boolean gameOver;
+	protected int difficulty;
 	
 	public LevelState(GameStateManager gsm, PlayerShip player) {
 	
 		this.gsm = gsm;
 		this.player = player;
+		difficulty = 0;
 		debrisField = new DebrisField();
 		
 	}
@@ -64,14 +67,22 @@ public abstract class LevelState extends GameState {
 									  Math.random() / 30, 2, asteroidHP);
 			addAsteroid(a);
 		}
+		/*
 		for (int i =0;i < numEnemies;i++){
 			Enemy a = new Enemy(this);
 			addEnemy(a);
 		}
-		player.setLives(3);
-        player.setScore(0);
-		player.spawn();
+		*/
+		gameOver = false;
 		
+		
+	}
+
+	public void gameOver() {
+		gameOver = true;
+		Sounds stop = player.getThrust();
+        stop.stop();
+		gsm.setState(GameStateManager.GAMEOVERSTATE);
 	}
 
     @Override
@@ -88,20 +99,17 @@ public abstract class LevelState extends GameState {
 			}
 		}
 		
-		// update player
-		player.update();
-		
-		if (player.isDead()) {
-			if (player.getLives() <= 0) {
-				//game over
-                Sounds stop = player.getThrust();
-                stop.stop();
-                Sounds gameover = new Sounds("/resources/sounds/gameover.wav");
-                gameover.play();
-				gsm.setState(GameStateManager.MENUSTATE);
-			}
-			else {
-				player.spawn();
+		if (!gameOver) {
+			// update player
+			player.update();
+			
+			if (player.isDead()) {
+				if (player.getLives() <= 0) {
+	                gameOver();
+				}
+				else {
+					player.spawn();
+				}
 			}
 		}
 		
@@ -123,11 +131,13 @@ public abstract class LevelState extends GameState {
 			}
 		}
 		
-		// draw player
-		player.draw(g);
-	
-		// draw HUD
-		hud.draw(g);
+		if (!gameOver) {
+			// draw player
+			player.draw(g);
+		
+			// draw HUD
+			hud.draw(g);
+		}
 		
 	}
 
@@ -170,5 +180,7 @@ public abstract class LevelState extends GameState {
 	public void removeAlien(Enemy enemy){
 		enemies.remove(enemy);
 	}
-
+	
+	protected abstract void refresh();
+	
 }

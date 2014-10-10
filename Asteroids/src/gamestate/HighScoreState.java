@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Random;
 
 import entity.Sounds;
 import main.GamePanel;
@@ -14,8 +12,6 @@ import tilemap.HUD;
 
 public class HighScoreState extends GameState {
 
-	private static final String scoresPath = "/resources/highScores";
-	private BufferedReader br;
 	private String[][] scores;
 	private int width;
 	private int height;
@@ -25,6 +21,14 @@ public class HighScoreState extends GameState {
 	private Color windowColor;
 	private long flashTimer;
     private Sounds music;
+    private static final int WINDOW_ALPHA = 210;
+    private boolean incR;
+    private boolean incG;
+    private boolean incB;
+    private int red;
+    private int green;
+    private int blue;
+    private Random rand;
 	
 	public HighScoreState(GameStateManager gsm) {
 		this.gsm = gsm;
@@ -33,32 +37,39 @@ public class HighScoreState extends GameState {
 		titleFont = new Font("Consolas", Font.PLAIN, 30);
 		infoFont = new Font("Consolas", Font.PLAIN, 25);
 		infoColor = Color.WHITE;
-		windowColor = new Color(0, 3, 14, 210);
+		rand = new Random();
+		//windowColor = new Color(0, 3, 14, WINDOW_ALPHA);
         music = new Sounds("/resources/sounds/highscoremusic.wav");
 	}
 
 	@Override
 	public void init() {
-		try {
-			br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(scoresPath)));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		scores = new String[10][];
-		for (int i = 0; i < 10; i++) {
-			try {
-				scores[i] = br.readLine().trim().split(",");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		scores = GameOverState.readScores();
 		flashTimer = System.nanoTime();
         music.loop();
+        red = 255;
+		green = 0;
+		blue = rand.nextInt(255);
+		windowColor = new Color(red, green, blue, WINDOW_ALPHA);
+		incR = false;
+		incG = true;
+		if (blue == 255) incB = false;
+		else if (blue == 0) incB = true;
+		else incB = rand.nextBoolean();
 	}
 
     @Override
 	public void update() {
+		if (incR) red++;
+		else red--;
+		if (red == 255 || red == 0) incR = !incR;
+		if (incG) green++;
+		else green--;
+		if (green == 255 || green == 0) incG = !incG;
+		if (incB) blue++;
+		else blue--;
+		if (blue == 255 || blue == 0) incB = !incB;
+		windowColor = new Color(red, green, blue, WINDOW_ALPHA);
 		gsm.getState(GameStateManager.MENUSTATE).update();
 	}
 

@@ -14,7 +14,6 @@ public class HUD implements Drawable {
 
 	private PlayerShip player;
 	private BufferedImage image;
-    private BufferedImage livesImage;
 	private AffineTransform at;
 	private Font font;
 	private Color color;
@@ -28,7 +27,6 @@ public class HUD implements Drawable {
 		font = new Font("Consolas", Font.PLAIN, 25);
 		color = Color.WHITE;
 		image = player.getImage();
-        livesImage = player.getLivesImage();
 		at = AffineTransform.getScaleInstance(0.6, 0.6);
 	}
 
@@ -43,7 +41,7 @@ public class HUD implements Drawable {
 		g.drawString("Lives", drawX, 30);
 		g.setTransform(at);
 		for (int i = 0; i < player.getLives(); i++) {
-			g.drawImage(livesImage, 75 + (i * (livesImage.getWidth() + 10)), 60, null);
+			g.drawImage(image, 75 + (i * (image.getWidth() + 10)), 60, null);
 		}
 		g.setTransform(tempAT);
 		drawX = (9 * GamePanel.WIDTH / 10) - (g.getFontMetrics().stringWidth("Score") / 2);
@@ -55,10 +53,8 @@ public class HUD implements Drawable {
 		
 	}
 
-	@Override
-	public void update() {
-        livesImage = player.getLivesImage();
-
+    @Override
+    public void update() {
+        image = player.getImage();
     }
-
 }

@@ -32,7 +32,6 @@ public class MenuState extends GameState{
 			mainbg = new Images("/resources/backgrounds/mainbg.png");
 			debrisField = new DebrisField();
             music = new Sounds("/resources/sounds/menumusic.wav");
-            music.loop();
 
 			title = new Images("/resources/backgrounds/asteroidsTitle.png");
 			title.setPosition((GamePanel.WIDTH / 2) - (title.getWidth() / 2), 125);
@@ -58,7 +57,7 @@ public class MenuState extends GameState{
 	
 	public void init() {
 		currentChoice = 0;
-        music.loop();
+	    music.loop();
 	}
 
     public void selection(){

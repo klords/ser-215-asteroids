@@ -20,7 +20,8 @@ public class PlayerShip extends Entity {
 
     //image for lives
     private BufferedImage livesImage;
-	
+	private BufferedImage icon;
+
 	//animations
 	private ArrayList<BufferedImage[]> animationArrayList;
 	
@@ -67,7 +68,8 @@ public class PlayerShip extends Entity {
 		
 		drawImage = image;
         livesImage = image;
-		
+		icon = image;
+
 		animation = new Animation();
 		animationArrayList = new ArrayList<BufferedImage[]>();
 		for (Accel a : Accel.values()) {
@@ -98,13 +100,13 @@ public class PlayerShip extends Entity {
     }
 	
 	public BufferedImage getImage() {
-		return drawImage;
+		return icon;
 	}
 
     public BufferedImage getLivesImage() {
         return livesImage;
     }
-	
+
 	public void spawn() {
         try{
             image = ImageIO.read(getClass().getResourceAsStream("/resources/ships/" + shipArray[currentShip] + ".png"));//load the current ship
@@ -114,7 +116,7 @@ public class PlayerShip extends Entity {
         }
 
         drawImage = image;
-        livesImage = image;
+        icon = image;
 		isDead = false;
 		spawnTimer = System.nanoTime();
 		invulnerable = isSpawning = true;
