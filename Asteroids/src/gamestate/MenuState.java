@@ -62,8 +62,7 @@ public class MenuState extends GameState{
 
     public void selection(){
 		if (currentChoice==0){
-			gsm.setState(GameStateManager.SHIPSELECTSTATE);
-            music.stop();
+			gsm.setState(GameStateManager.PLAYERSELECTSTATE);
 		}
 		if (currentChoice==1){
 			gsm.setState(GameStateManager.HIGHSCORESTATE);

@@ -1,9 +1,9 @@
 package gamestate;
 
 import entity.PlayerShip;
+import entity.Sounds;
 import main.GamePanel;
 import tilemap.DebrisField;
-import tilemap.HUD;
 import tilemap.Images;
 
 import java.awt.*;
@@ -17,10 +17,15 @@ public class ShipSelectState extends GameState {
     private Images[] red;
     private Images[] blue;
     private Images[] green;
+    private Images title;
     private Images mainbg;
     private DebrisField debrisField;
     private PlayerShip player;
-    private HUD hud;
+    private Sounds music;
+    private Font font;
+    private float width;
+    private float height;
+    private String playerString;
 
     public ShipSelectState(GameStateManager gsm, PlayerShip player) {
         this.player = player;
@@ -28,18 +33,21 @@ public class ShipSelectState extends GameState {
         try {
             mainbg = new Images("/resources/backgrounds/mainbg.png");
             debrisField = new DebrisField();
+            music = new Sounds("/resources/sounds/menumusic.wav");
+            title = new Images("/resources/backgrounds/asteroidsTitle.png");
 
             red = new Images[]{new Images("/resources/ships/redShip.png"), new Images("/resources/ships/redShipA3.png")};
             blue = new Images[]{new Images("/resources/ships/blueShip.png"), new Images("/resources/ships/blueShipA3.png")};
             green = new Images[]{new Images("/resources/ships/greenShip.png"), new Images("/resources/ships/greenShipA3.png")};
 
             // set position of images
-            red[0].setPosition((GamePanel.WIDTH / 2) - (red[0].getWidth() / 2), (GamePanel.HEIGHT * 0.25) - (red[0].getHeight() / 2));
-            red[1].setPosition((GamePanel.WIDTH / 2) - (red[0].getWidth() / 2), (GamePanel.HEIGHT * 0.25) - (red[0].getHeight() / 2));
-            blue[0].setPosition((GamePanel.WIDTH / 2) - (blue[0].getWidth() / 2), (GamePanel.HEIGHT * 0.5) - (blue[0].getHeight() / 2));
-            blue[1].setPosition((GamePanel.WIDTH / 2) - (blue[0].getWidth() / 2), (GamePanel.HEIGHT * 0.5) - (blue[0].getHeight() / 2));
-            green[0].setPosition((GamePanel.WIDTH / 2) - (green[0].getWidth() / 2), (GamePanel.HEIGHT * 0.75) - (green[0].getHeight() / 2));
-            green[1].setPosition((GamePanel.WIDTH / 2) - (green[0].getWidth() / 2), (GamePanel.HEIGHT * 0.75) - (green[0].getHeight() / 2));
+            title.setPosition((GamePanel.WIDTH / 2) - (title.getWidth() / 2), (GamePanel.HEIGHT * 1 / 6) - (title.getHeight() / 2));
+            red[0].setPosition((GamePanel.WIDTH / 2) - (red[0].getWidth() / 2), (GamePanel.HEIGHT * 3 / 6) - (red[0].getHeight() / 2));
+            red[1].setPosition((GamePanel.WIDTH / 2) - (red[0].getWidth() / 2), (GamePanel.HEIGHT * 3 / 6) - (red[0].getHeight() / 2));
+            blue[0].setPosition((GamePanel.WIDTH / 2) - (blue[0].getWidth() / 2), (GamePanel.HEIGHT * 4 / 6) - (blue[0].getHeight() / 2));
+            blue[1].setPosition((GamePanel.WIDTH / 2) - (blue[0].getWidth() / 2), (GamePanel.HEIGHT * 4 / 6) - (blue[0].getHeight() / 2));
+            green[0].setPosition((GamePanel.WIDTH / 2) - (green[0].getWidth() / 2), (GamePanel.HEIGHT * 5 / 6) - (green[0].getHeight() / 2));
+            green[1].setPosition((GamePanel.WIDTH / 2) - (green[0].getWidth() / 2), (GamePanel.HEIGHT * 5 / 6) - (green[0].getHeight() / 2));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,17 +55,22 @@ public class ShipSelectState extends GameState {
 
     public void init() {
         shipChoice = 0;
+        music.loop();
+
     }
 
     public void selection() {
         if (shipChoice==0) {
             player.setCurrentShip(0);
+            music.stop();
             gsm.setState(GameStateManager.LEVEL1STATE);
         } else if (shipChoice==1) {
             player.setCurrentShip(1);
+            music.stop();
             gsm.setState(GameStateManager.LEVEL1STATE);
         } else if (shipChoice==2) {
             player.setCurrentShip(2);
+            music.stop();
             gsm.setState(GameStateManager.LEVEL1STATE);
         }
     }
@@ -69,8 +82,18 @@ public class ShipSelectState extends GameState {
 
     @Override
     public void draw(Graphics2D g) {
+        if (gsm.getCurrentPlayer() == 0) {
+            playerString = "Player One";
+        } else {
+            playerString = "Player Two";
+        }
+        height = (float)((GamePanel.HEIGHT * 2 / 6));
+        width = (float)((GamePanel.WIDTH / 2.0) - (g.getFontMetrics().stringWidth(playerString) / 2));
         mainbg.draw(g);//draw the background
         debrisField.draw(g);//draw debris field
+        title.draw(g);//draw title
+        g.setFont(font);
+        g.drawString(playerString, width, height);
 
         if (shipChoice==0) {
             red[1].draw(g);

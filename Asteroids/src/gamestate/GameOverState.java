@@ -37,6 +37,7 @@ public class GameOverState extends GameState {
 	private Color selectionColor;
 	private char[] input;
 	private PlayerShip player;
+    private boolean repeat;
 	private LevelState currentState;
 	private String[][] scores;
 	private boolean displayGO;
@@ -85,6 +86,12 @@ public class GameOverState extends GameState {
 			getInput = true;
 		else
 			getInput = false;
+
+        if (gsm.getCurrentPlayer() + 1 < gsm.getNumPlayers()) {
+            repeat = true;
+        } else {
+            repeat = false;
+        }
 		
 		currentSelection = 0;
 		
@@ -177,7 +184,13 @@ public class GameOverState extends GameState {
 			if (getInput) {
 				addScore();
 			}
-			gsm.setState(GameStateManager.MENUSTATE);
+            if (repeat) {
+                gsm.setCurrentPlayer(1);
+                gsm.setState(GameStateManager.SHIPSELECTSTATE);
+            } else {
+                gsm.setCurrentPlayer(0);
+                gsm.setState(GameStateManager.MENUSTATE);
+            }
 		}
 		if (getInput) {
 			if ((k >= KeyEvent.VK_A && k <= KeyEvent.VK_Z) || 

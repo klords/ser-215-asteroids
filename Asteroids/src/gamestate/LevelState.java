@@ -51,10 +51,9 @@ public abstract class LevelState extends GameState {
 	
 	@Override
 	public void init() {
-		
-		asteroids = new ArrayList<Asteroid>();
-		enemies = new ArrayList<Enemy>();
-		hud = new HUD(player);
+        hud = new HUD(player);
+        asteroids = new ArrayList<Asteroid>();
+        enemies = new ArrayList<Enemy>();
 
         for (int i = 0; i < numAsteroids; i++) {
 			double newX = Math.random() * GamePanel.WIDTH;
@@ -182,5 +181,5 @@ public abstract class LevelState extends GameState {
 	}
 	
 	protected abstract void refresh();
-	
+
 }
