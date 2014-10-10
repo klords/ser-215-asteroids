@@ -3,6 +3,7 @@ package gamestate;
 import java.awt.Graphics2D;
 import java.awt.event.*;
 
+import entity.Sounds;
 import main.GamePanel;
 import tilemap.DebrisField;
 import tilemap.Images;
@@ -19,6 +20,8 @@ public class MenuState extends GameState{
 	private Images[] highScores;
 	private Images[] exitGame;
 	private int currentChoice;
+
+    private Sounds music;
 	
 	public MenuState(GameStateManager gsm){
 		this.gsm = gsm;
@@ -27,7 +30,9 @@ public class MenuState extends GameState{
 			
 			mainbg = new Images("/resources/backgrounds/mainbg.png");
 			debrisField = new DebrisField();
-			
+            music = new Sounds("/resources/sounds/menumusic.wav");
+            music.loop();
+
 			title = new Images("/resources/backgrounds/asteroidsTitle.png");
 			title.setPosition((GamePanel.WIDTH / 2) - (title.getWidth() / 2), 125);
 			start = new Images[] {new Images("/resources/backgrounds/startButton.png"),
@@ -57,11 +62,14 @@ public class MenuState extends GameState{
 	public void selection(){
 		if (currentChoice==0){
 			gsm.setState(GameStateManager.LEVEL1STATE);
+            music.stop();
 		}
 		if (currentChoice==1){
 			gsm.setState(GameStateManager.HIGHSCORESTATE);
+            music.stop();
 		}
 		if (currentChoice==2){
+            music.stop();
 			System.exit(0);
 		}
 	}
@@ -92,7 +100,7 @@ public class MenuState extends GameState{
 		// draw quit button
 		if (currentChoice == 2) exitGame[0].draw(g);
 		else exitGame[1].draw(g);
-		
+
 	}
 	
 	@Override

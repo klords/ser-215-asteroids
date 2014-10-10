@@ -30,11 +30,15 @@ public class PlayerShip extends Entity {
 	//spawn info
 	private boolean isSpawning;
 	private long spawnTimer;
-	
-	public PlayerShip(){
+
+    // sound info
+    private Sounds sound;
+
+    public PlayerShip(){
 		super();
 		lives = 3;
 		width = 32;
+
 		//height = 48;
 		radius = width / 2;
 		accelSpeed = 0.2;
@@ -45,6 +49,8 @@ public class PlayerShip extends Entity {
 		currentShip = 0;
 		maxMissiles = 3;
 		turnSpeed = 6;
+        sound = new Sounds("/resources/sounds/thrust.wav");
+
 		
 		x = GamePanel.WIDTH / 2 - radius;
 		y = GamePanel.HEIGHT / 2 - radius;
@@ -74,6 +80,10 @@ public class PlayerShip extends Entity {
 		}
 		
 	}
+
+    public Sounds getSound() {
+        return sound;
+    }
 	
 	public BufferedImage getImage() {
 		return drawImage;
@@ -210,14 +220,20 @@ public class PlayerShip extends Entity {
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_LEFT) turn(-turnSpeed);
 		if (k == KeyEvent.VK_RIGHT) turn(turnSpeed);
-		if (k == KeyEvent.VK_UP) thrust(true);
+		if (k == KeyEvent.VK_UP) {
+            sound.loop();
+            thrust(true);
+        }
 		if (k == KeyEvent.VK_SPACE) shoot();
 	}
 
 	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_LEFT && angularVelocity == -turnSpeed) turn(0);
 		if (k == KeyEvent.VK_RIGHT && angularVelocity == turnSpeed) turn(0);
-		if (k == KeyEvent.VK_UP) thrust(false);
+		if (k == KeyEvent.VK_UP) {
+            sound.stop();
+            thrust(false);
+        }
 	}
 	
 }

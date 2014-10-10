@@ -1,0 +1,12 @@
+==========================IMAGES============================
+-All regular (alien and player) sprites are 32x32 px
+
+-bosses are 128x128px
+	-centipede has 32x32 body segments
+
+-large asteroids : 64x64
+-small asteroids : 32x32
+-all asteroid breaks : 22x22
+
+
+==========================AUDIO=============================

@@ -84,6 +84,8 @@ public class Asteroid extends MapObject {
     	if (durability <= 0) {
     		e.incScore(this.value);
     		remove();
+            Sounds sound = new Sounds("/resources/sounds/explode.wav");
+            sound.play();
     	}
     }
     
