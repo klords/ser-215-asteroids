@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
+import entity.Sounds;
 import main.GamePanel;
 import tilemap.DebrisField;
 import tilemap.Images;
@@ -49,7 +50,7 @@ public abstract class LevelState extends GameState {
 		asteroids = new ArrayList<Asteroid>();
 		enemies = new ArrayList<Enemy>();
 		hud = new HUD(player);
-				
+
 		for (int i = 0; i < numAsteroids; i++) {
 			double newX = Math.random() * GamePanel.WIDTH;
 			while (newX > (GamePanel.WIDTH / 4) && newX < (3 * GamePanel.WIDTH / 4)) newX = Math.random() * GamePanel.WIDTH;
@@ -65,7 +66,8 @@ public abstract class LevelState extends GameState {
 			Enemy a = new Enemy(this);
 			addEnemy(a);
 		}
-		
+		player.setLives(3);
+        player.setScore(0);
 		player.spawn();
 		
 	}
@@ -89,6 +91,10 @@ public abstract class LevelState extends GameState {
 		if (player.isDead()) {
 			if (player.getLives() <= 0) {
 				//game over
+                Sounds stop = player.getSound();
+                stop.stop();
+                Sounds gameover = new Sounds("/resources/sounds/gameover.wav");
+                gameover.play();
 				gsm.setState(GameStateManager.MENUSTATE);
 			}
 			else {

@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import entity.Sounds;
 import main.GamePanel;
 
 public class HighScoreState extends GameState {
@@ -22,6 +23,7 @@ public class HighScoreState extends GameState {
 	private Color infoColor;
 	private Color windowColor;
 	private long flashTimer;
+    private Sounds music;
 	
 	public HighScoreState(GameStateManager gsm) {
 		this.gsm = gsm;
@@ -31,6 +33,7 @@ public class HighScoreState extends GameState {
 		infoFont = new Font("Consolas", Font.PLAIN, 25);
 		infoColor = Color.WHITE;
 		windowColor = new Color(0, 3, 14, 210);
+        music = new Sounds("/resources/sounds/highscoremusic.wav");
 	}
 
 	@Override
@@ -50,6 +53,7 @@ public class HighScoreState extends GameState {
 			}
 		}
 		flashTimer = System.nanoTime();
+        music.loop();
 	}
 
 	@Override
@@ -93,6 +97,7 @@ public class HighScoreState extends GameState {
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.setState(GameStateManager.MENUSTATE);
+            music.stop();
 		}
 	}
 

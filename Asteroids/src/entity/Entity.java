@@ -50,7 +50,11 @@ public abstract class Entity extends MapObject {
     public int getScore() {
     	return score;
     }
-    
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public double getFireRate() {
         return fireRate;
     }
@@ -191,6 +195,8 @@ public abstract class Entity extends MapObject {
 												  (velocity[1] * 1.15) +(14 * Math.sin(Math.toRadians(angle - 90)))},
 									missileDamage);
 			missiles.add(m);
+            Sounds sound = new Sounds("/resources/sounds/shoot.wav");
+            sound.play();
 		}
 		
 	}
