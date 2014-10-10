@@ -1,5 +1,7 @@
 package gamestate;
 
+import tilemap.HUD;
+
 import java.awt.Graphics2D;
 
 public abstract class GameState {

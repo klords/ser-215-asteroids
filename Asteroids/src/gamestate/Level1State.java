@@ -3,6 +3,7 @@ package gamestate;
 import java.awt.Graphics2D;
 
 import entity.PlayerShip;
+import tilemap.HUD;
 import tilemap.Images;
 
 
@@ -27,7 +28,7 @@ public class Level1State extends LevelState {
 		
 	}
 
-	@Override
+    @Override
 	public void init() {
 		
 		player.setState(this);

@@ -277,9 +277,11 @@ public class GameOverState extends GameState {
 				if (i < 9) pw.println();
 			}
 			pw.close();
-		} catch (FileNotFoundException | URISyntaxException e) {
-			e.printStackTrace();
-		}
+		} catch (FileNotFoundException fnfex) {
+			fnfex.printStackTrace();
+		} catch (URISyntaxException uriex) {
+            uriex.printStackTrace();
+        }
 		
 	}
 	

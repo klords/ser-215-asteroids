@@ -8,6 +8,7 @@ import java.util.Random;
 
 import entity.Sounds;
 import main.GamePanel;
+import tilemap.HUD;
 
 public class HighScoreState extends GameState {
 
@@ -57,7 +58,7 @@ public class HighScoreState extends GameState {
 		else incB = rand.nextBoolean();
 	}
 
-	@Override
+    @Override
 	public void update() {
 		if (incR) red++;
 		else red--;

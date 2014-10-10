@@ -53,7 +53,8 @@ public class HUD implements Drawable {
 		
 	}
 
-	@Override
-	public void update() {}
-	
+    @Override
+    public void update() {
+        image = player.getImage();
+    }
 }
