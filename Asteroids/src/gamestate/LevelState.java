@@ -91,7 +91,7 @@ public abstract class LevelState extends GameState {
 		if (player.isDead()) {
 			if (player.getLives() <= 0) {
 				//game over
-                Sounds stop = player.getSound();
+                Sounds stop = player.getThrust();
                 stop.stop();
                 Sounds gameover = new Sounds("/resources/sounds/gameover.wav");
                 gameover.play();
