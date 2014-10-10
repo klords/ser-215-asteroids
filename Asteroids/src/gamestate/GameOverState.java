@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.net.URISyntaxException;
 
 import entity.PlayerShip;
+import entity.Sounds;
 import main.GamePanel;
 import tilemap.BGFade;
 
@@ -111,6 +112,8 @@ public class GameOverState extends GameState {
 		}
 		
 		if (GOAlpha == 180) {
+			Sounds gameover = new Sounds("/resources/sounds/gameover.wav");
+            gameover.play();
 			isIntro = false;
 		}
 		

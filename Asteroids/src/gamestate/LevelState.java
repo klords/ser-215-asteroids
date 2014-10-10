@@ -89,6 +89,13 @@ public abstract class LevelState extends GameState {
 		// update debris
 		debrisField.update();
 		
+		// update asteroids
+		if (!asteroids.isEmpty()) {
+			for (int i = 0; i < asteroids.size(); i++) {
+				asteroids.get(i).update();
+			}
+		}
+		
 		if (!gameOver) {
 			// update player
 			player.update();
@@ -100,31 +107,6 @@ public abstract class LevelState extends GameState {
 				else {
 					player.spawn();
 				}
-			}
-		}
-		
-		// update asteroids
-		if (!asteroids.isEmpty()) {
-			for (int i = 0; i < asteroids.size(); i++) {
-				asteroids.get(i).update();
-			}
-		}
-		
-		
-		// update player
-		player.update();
-		
-		if (player.isDead()) {
-			if (player.getLives() <= 0) {
-				//game over
-                Sounds stop = player.getThrust();
-                stop.stop();
-                Sounds gameover = new Sounds("/resources/sounds/gameover.wav");
-                gameover.play();
-				gsm.setState(GameStateManager.MENUSTATE);
-			}
-			else {
-				player.spawn();
 			}
 		}
 		
