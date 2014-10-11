@@ -63,11 +63,12 @@ public class MenuState extends GameState{
 
     public void selection(){
 		if (currentChoice==0){
+            music.stop();
 			gsm.setState(GameStateManager.PLAYERSELECTSTATE);
 		}
 		if (currentChoice==1){
-			gsm.setState(GameStateManager.HIGHSCORESTATE);
             music.stop();
+            gsm.setState(GameStateManager.HIGHSCORESTATE);
 		}
 		if (currentChoice==2){
             music.stop();
