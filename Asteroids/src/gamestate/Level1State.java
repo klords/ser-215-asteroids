@@ -46,11 +46,12 @@ public class Level1State extends LevelState {
 		super.update();
 		
 		if (asteroids.isEmpty() && enemies.isEmpty()) {
-			if (difficulty % 3 == 2) {
-				refresh(); //spawnBoss();
+			if (difficulty % 3 == 0) {
+				refresh(true);
 			} else {
 				refresh();
 			}
+            difficulty++;
 		}
 	}
 	
@@ -70,10 +71,18 @@ public class Level1State extends LevelState {
 	}
 	
 	protected void refresh() {
-		if (difficulty % 3 == 0) {
-			numAsteroids++;
-		}
-		super.init();
+		refresh(false);
 	}
+
+    protected void refresh(boolean boss) {
+        if (boss) {
+            //spawnBoss();
+        }
+        if (difficulty % 3 == 0) {
+            numAsteroids++;
+        }
+
+        super.init();
+    }
 	
 }
