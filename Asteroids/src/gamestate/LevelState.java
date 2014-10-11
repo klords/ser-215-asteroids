@@ -34,7 +34,7 @@ public abstract class LevelState extends GameState {
 	
 		this.gsm = gsm;
 		this.player = player;
-		difficulty = 0;
+		difficulty = 1;
 		debrisField = new DebrisField();
 		
 	}
@@ -78,6 +78,7 @@ public abstract class LevelState extends GameState {
 	}
 
 	public void gameOver() {
+        numAsteroids = 3;
 		gameOver = true;
 		Sounds stop = player.getThrust();
         stop.stop();
