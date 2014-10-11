@@ -14,10 +14,11 @@ syntax: glob
 .project
 .manager
 .scala_dependencies
-out
+out/
+.metadata/
 
 # idea
-.idea
+.idea/
 *.iml
 
 # building
