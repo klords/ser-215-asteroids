@@ -44,6 +44,7 @@ public class GameOverState extends GameState {
 	private boolean getInput;
 	private boolean displayInput;
 	private int currentSelection;
+    private long flashTimer;
 	
 	public GameOverState(GameStateManager gsm) {
 		
@@ -55,6 +56,7 @@ public class GameOverState extends GameState {
 
 	@Override
 	public void init() {
+        flashTimer = System.nanoTime();
 		
 		currentState = (LevelState) gsm.getState(gsm.getPrevState());
 		player = currentState.player;
@@ -154,6 +156,11 @@ public class GameOverState extends GameState {
 					300
 				};
 		g.drawString(GO_STR, (int)GOPos[0], (int)GOPos[1]);
+        g.setColor(new Color(232,255,125));
+        g.setFont(new Font("Arial", Font.PLAIN, 17));
+        if ((System.nanoTime() - flashTimer) / 1000000 % 2000 <= 1000) {
+            g.drawString("Press ENTER to continue", (int)GOPos[0]+25, (int)GOPos[1]+50);
+        }
 		
 		g.setColor(inputColor);
 		g.setFont(inputFont);

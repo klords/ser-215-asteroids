@@ -13,10 +13,10 @@ import java.awt.event.KeyEvent;
  */
 public class PlayerSelectState extends GameState {
     private int numPlayers;
-    float oneW;
-    float twoW;
-    float oneH;
-    float twoH;
+    private float oneW;
+    private float twoW;
+    private float oneH;
+    private float twoH;
 
     // fonts
     private Font unselect;
@@ -32,14 +32,16 @@ public class PlayerSelectState extends GameState {
     private Images[] one;
     private Images[] two;
 
+    private Sounds music;
+
     public PlayerSelectState(GameStateManager gsm) {
         this.gsm = gsm;
-        unselect = new Font("Consolas", Font.PLAIN, 40);
-        select = new Font("Consolas", Font.BOLD, 40);
-        nav = new Font("Consolas", Font.PLAIN, 15);
+        unselect = new Font("Courier", Font.BOLD, 40);
+        select = new Font("Courier", Font.BOLD, 43);
+        nav = new Font("Courier", Font.PLAIN, 15);
 
         try {
-
+            music = new Sounds("/Resources/sounds/menumusic.wav");
             mainbg = new Images("/Resources/backgrounds/mainbg.png");
             debrisField = new DebrisField();
             title = new Images("/Resources/backgrounds/asteroidsTitle.png");
@@ -53,9 +55,11 @@ public class PlayerSelectState extends GameState {
     public void selection() {
         if (numPlayers == 0) {
             gsm.setNumPlayers(1);
+            music.stop();
             gsm.setState(GameStateManager.SHIPSELECTSTATE);
         } else if (numPlayers == 1) {
             gsm.setNumPlayers(2);
+            music.stop();
             gsm.setState(GameStateManager.SHIPSELECTSTATE);
         }
     }
@@ -63,6 +67,7 @@ public class PlayerSelectState extends GameState {
     @Override
     public void init() {
         numPlayers = 0;
+        music.loop();
 
     }
 
@@ -80,9 +85,10 @@ public class PlayerSelectState extends GameState {
         mainbg.draw(g);//draw the background
         debrisField.draw(g);//draw debris field
         title.draw(g);//draw title
+        g.setColor(new Color(232,255,125));
         g.setFont(nav);
         g.drawString("(ESC) Back", 25, 25);
-        g.drawString("(ENTER) Select", 675, 25);
+        g.drawString("(ENTER) Select", 650, 25);
 
         if (numPlayers==0) {
             g.setFont(select);
@@ -112,6 +118,7 @@ public class PlayerSelectState extends GameState {
                 if (++numPlayers > 1) numPlayers = 0;
                 break;
             case KeyEvent.VK_ESCAPE:
+                music.stop();
                 gsm.setState(GameStateManager.MENUSTATE);
                 break;
             case KeyEvent.VK_ENTER:

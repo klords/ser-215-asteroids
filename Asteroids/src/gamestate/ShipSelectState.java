@@ -26,13 +26,15 @@ public class ShipSelectState extends GameState {
     private float width;
     private float height;
     private String playerString;
+    private Sounds music;
 
     public ShipSelectState(GameStateManager gsm, PlayerShip player) {
         this.player = player;
         this.gsm = gsm;
-        this.font = new Font("Consolas", Font.PLAIN, 40);
-        this.nav = new Font("Consolas", Font.PLAIN, 15);
+        this.font = new Font("Courier", Font.BOLD, 40);
+        this.nav = new Font("Courier", Font.PLAIN, 15);
         try {
+            music = new Sounds("/Resources/sounds/menumusic.wav");
             mainbg = new Images("/Resources/backgrounds/mainbg.png");
             debrisField = new DebrisField();
             title = new Images("/Resources/backgrounds/asteroidsTitle.png");
@@ -56,17 +58,21 @@ public class ShipSelectState extends GameState {
 
     public void init() {
         shipChoice = 0;
+        music.loop();
     }
 
     public void selection() {
         if (shipChoice==0) {
             player.setCurrentShip(0);
+            music.stop();
             gsm.setState(GameStateManager.LEVEL1STATE);
         } else if (shipChoice==1) {
             player.setCurrentShip(1);
+            music.stop();
             gsm.setState(GameStateManager.LEVEL1STATE);
         } else if (shipChoice==2) {
             player.setCurrentShip(2);
+            music.stop();
             gsm.setState(GameStateManager.LEVEL1STATE);
         }
     }
@@ -84,15 +90,16 @@ public class ShipSelectState extends GameState {
             playerString = "Player Two";
         }
         height = (float)((GamePanel.HEIGHT * 2 / 6));
-        width = (float)((GamePanel.WIDTH / 2.0) - (g.getFontMetrics().stringWidth(playerString)));
+        width = (float)((GamePanel.WIDTH / 2.0) - (g.getFontMetrics().stringWidth(playerString)) - 25);
         mainbg.draw(g);//draw the background
         debrisField.draw(g);//draw debris field
         title.draw(g);//draw title
         g.setFont(font);
         g.drawString(playerString, width, height);
         g.setFont(nav);
+        g.setColor(new Color(232,255,125));
         g.drawString("(ESC) Back", 25, 25);
-        g.drawString("(ENTER) Select", 675, 25);
+        g.drawString("(ENTER) Select", 650, 25);
 
         if (shipChoice==0) {
             red[1].draw(g);
@@ -124,6 +131,7 @@ public class ShipSelectState extends GameState {
                 if (++shipChoice > 2) shipChoice = 0;
                 break;
             case KeyEvent.VK_ESCAPE:
+                music.stop();
                 gsm.setState(GameStateManager.PLAYERSELECTSTATE);
                 break;
             case KeyEvent.VK_ENTER:
