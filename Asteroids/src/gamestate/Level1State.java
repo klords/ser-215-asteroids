@@ -36,7 +36,7 @@ public class Level1State extends LevelState {
 		player.setLives(3);
         player.setScore(0);
         player.spawn();
-        
+
 		super.init();
 		
 	}
