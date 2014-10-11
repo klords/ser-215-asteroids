@@ -20,7 +20,7 @@ public class Level1State extends LevelState {
 		infectedEnemyHP = 3;
 		
 		try {
-			bg = new Images("/resources/backgrounds/level1bg.png");
+			bg = new Images("/Resources/backgrounds/level1bg.png");
 		}
 		catch(Exception e){
 			e.printStackTrace();

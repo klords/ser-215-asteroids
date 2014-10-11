@@ -53,14 +53,14 @@ public class PlayerShip extends Entity {
 		currentShip = 0;
 		maxMissiles = 3;
 		turnSpeed = 6;
-        thrust = new Sounds("/resources/sounds/thrust.wav");
+        thrust = new Sounds("/Resources/sounds/thrust.wav");
 
 		
 		x = GamePanel.WIDTH / 2 - radius;
 		y = GamePanel.HEIGHT / 2 - radius;
 		
 		try{
-			image = ImageIO.read(getClass().getResourceAsStream("/resources/ships/" + shipArray[currentShip] + ".png"));//load the current ship
+			image = ImageIO.read(getClass().getResourceAsStream("/Resources/ships/" + shipArray[currentShip] + ".png"));//load the current ship
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -76,7 +76,7 @@ public class PlayerShip extends Entity {
 			BufferedImage[] bi = new BufferedImage[framesCount];
 			for (int i = 0; i < framesCount; i++) {
 				try {
-					bi[i] = ImageIO.read(getClass().getResourceAsStream("/resources/ships/" + shipArray[a.ordinal()] + "A" + i + ".png"));
+					bi[i] = ImageIO.read(getClass().getResourceAsStream("/Resources/ships/" + shipArray[a.ordinal()] + "A" + i + ".png"));
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -109,7 +109,7 @@ public class PlayerShip extends Entity {
 
 	public void spawn() {
         try{
-            image = ImageIO.read(getClass().getResourceAsStream("/resources/ships/" + shipArray[currentShip] + ".png"));//load the current ship
+            image = ImageIO.read(getClass().getResourceAsStream("/Resources/ships/" + shipArray[currentShip] + ".png"));//load the current ship
         }
         catch(Exception e){
             e.printStackTrace();

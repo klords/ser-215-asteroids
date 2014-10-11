@@ -200,7 +200,7 @@ public abstract class Entity extends MapObject {
 									missileDamage);
 			missiles.add(m);
             
-			Sounds sound = new Sounds("/resources/sounds/shoot.wav");
+			Sounds sound = new Sounds("/Resources/sounds/shoot.wav");
             sound.play();
             
 		}

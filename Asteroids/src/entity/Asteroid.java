@@ -37,8 +37,8 @@ public class Asteroid extends MapObject {
     	}
     	try {
 			String img;
-			if (size == 2) img = "/resources/asteroids/asteroidLarge2.png";
-			else img = "/resources/asteroids/asteroidSmall2.png";
+			if (size == 2) img = "/Resources/asteroids/asteroidLarge2.png";
+			else img = "/Resources/asteroids/asteroidSmall2.png";
     		image = ImageIO.read(getClass().getResourceAsStream(img));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -84,7 +84,7 @@ public class Asteroid extends MapObject {
     	if (durability <= 0) {
     		e.incScore(this.value);
     		remove();
-            Sounds sound = new Sounds("/resources/sounds/explode.wav");
+            Sounds sound = new Sounds("/Resources/sounds/explode.wav");
             sound.play();
     	}
     }

@@ -28,7 +28,7 @@ public class Alien1 extends Enemy {
     	super(currentState);
 		
     	try{
-			image = ImageIO.read(getClass().getResourceAsStream("/resources/enemies/alienShip.png"));//load alien1
+			image = ImageIO.read(getClass().getResourceAsStream("/Resources/enemies/alienShip.png"));//load alien1
 		}
 		catch(Exception e){
 			e.printStackTrace();

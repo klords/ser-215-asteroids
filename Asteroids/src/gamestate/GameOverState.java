@@ -119,7 +119,7 @@ public class GameOverState extends GameState {
 		}
 		
 		if (GOAlpha == 180) {
-			Sounds gameover = new Sounds("/resources/sounds/gameover.wav");
+			Sounds gameover = new Sounds("/Resources/sounds/gameover.wav");
             gameover.play();
 			isIntro = false;
 		}
@@ -228,7 +228,7 @@ public class GameOverState extends GameState {
 			br = new BufferedReader(
 				new InputStreamReader(
 						GameOverState.class.getResourceAsStream(
-								"/resources/highScores"
+								"/Resources/highScores"
 								)
 						)
 				);
@@ -281,7 +281,7 @@ public class GameOverState extends GameState {
 			PrintWriter pw = new PrintWriter(
 					new File(
 							getClass().getResource(
-									"/resources/highScores"
+									"/Resources/highScores"
 									).toURI()
 							)
 					);

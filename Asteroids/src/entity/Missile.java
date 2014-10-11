@@ -24,7 +24,7 @@ public class Missile extends MapObject {
     	lifeTimer = System.nanoTime();
     	this.entity = entity;
     	try {
-			image = ImageIO.read(getClass().getResourceAsStream("/resources/missiles/normalMissile.png"));
+			image = ImageIO.read(getClass().getResourceAsStream("/Resources/missiles/normalMissile.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

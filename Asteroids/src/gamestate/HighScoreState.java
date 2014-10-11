@@ -39,7 +39,7 @@ public class HighScoreState extends GameState {
 		infoColor = Color.WHITE;
 		rand = new Random();
 		//windowColor = new Color(0, 3, 14, WINDOW_ALPHA);
-        music = new Sounds("/resources/sounds/highscoremusic.wav");
+        music = new Sounds("/Resources/sounds/highscoremusic.wav");
 	}
 
 	@Override
