@@ -21,7 +21,6 @@ public class ShipSelectState extends GameState {
     private Images mainbg;
     private DebrisField debrisField;
     private PlayerShip player;
-    private Sounds music;
     private Font font;
     private Font nav;
     private float width;
@@ -36,7 +35,6 @@ public class ShipSelectState extends GameState {
         try {
             mainbg = new Images("/resources/backgrounds/mainbg.png");
             debrisField = new DebrisField();
-            music = new Sounds("/resources/sounds/menumusic.wav");
             title = new Images("/resources/backgrounds/asteroidsTitle.png");
 
             red = new Images[]{new Images("/resources/ships/redShip.png"), new Images("/resources/ships/redShipA3.png")};
