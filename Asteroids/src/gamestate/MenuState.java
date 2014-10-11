@@ -29,22 +29,22 @@ public class MenuState extends GameState{
 		
 		try {
 			
-			mainbg = new Images("/resources/backgrounds/mainbg.png");
+			mainbg = new Images("/Resources/backgrounds/mainbg.png");
 			debrisField = new DebrisField();
-            music = new Sounds("/resources/sounds/menumusic.wav");
+            music = new Sounds("/Resources/sounds/menumusic.wav");
 
-			title = new Images("/resources/backgrounds/asteroidsTitle.png");
+			title = new Images("/Resources/backgrounds/asteroidsTitle.png");
 			title.setPosition((GamePanel.WIDTH / 2) - (title.getWidth() / 2), 125);
-			start = new Images[] {new Images("/resources/backgrounds/startButton.png"),
-								  new Images("/resources/backgrounds/startButtonFade.png")};
+			start = new Images[] {new Images("/Resources/backgrounds/startButton.png"),
+								  new Images("/Resources/backgrounds/startButtonFade.png")};
 			start[0].setPosition((GamePanel.WIDTH / 2) - (start[0].getWidth() / 2), 275);
 			start[1].setPosition((GamePanel.WIDTH / 2) - (start[1].getWidth() / 2), 275);
-			highScores = new Images[] {new Images("/resources/backgrounds/hiscoreButton.png"),
-									   new Images("/resources/backgrounds/hiscoreButtonFade.png")};
+			highScores = new Images[] {new Images("/Resources/backgrounds/hiscoreButton.png"),
+									   new Images("/Resources/backgrounds/hiscoreButtonFade.png")};
 			highScores[0].setPosition((GamePanel.WIDTH / 2) - (highScores[0].getWidth() / 2), 325);
 			highScores[1].setPosition((GamePanel.WIDTH / 2) - (highScores[1].getWidth() / 2), 325);
-			exitGame = new Images[] {new Images("/resources/backgrounds/exitButton.png"),
-									 new Images("/resources/backgrounds/exitButtonFade.png")};
+			exitGame = new Images[] {new Images("/Resources/backgrounds/exitButton.png"),
+									 new Images("/Resources/backgrounds/exitButtonFade.png")};
 			exitGame[0].setPosition((GamePanel.WIDTH / 2) - (exitGame[0].getWidth() / 2), 385);
 			exitGame[1].setPosition((GamePanel.WIDTH / 2) - (exitGame[1].getWidth() / 2), 385);
 			

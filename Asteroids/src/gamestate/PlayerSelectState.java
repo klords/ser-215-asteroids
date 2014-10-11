@@ -40,9 +40,9 @@ public class PlayerSelectState extends GameState {
 
         try {
 
-            mainbg = new Images("/resources/backgrounds/mainbg.png");
+            mainbg = new Images("/Resources/backgrounds/mainbg.png");
             debrisField = new DebrisField();
-            title = new Images("/resources/backgrounds/asteroidsTitle.png");
+            title = new Images("/Resources/backgrounds/asteroidsTitle.png");
             title.setPosition((GamePanel.WIDTH / 2) - (title.getWidth() / 2), (GamePanel.HEIGHT * 0.25) - (title.getHeight() / 2));
 
         } catch (Exception e) {

@@ -33,13 +33,13 @@ public class ShipSelectState extends GameState {
         this.font = new Font("Consolas", Font.PLAIN, 40);
         this.nav = new Font("Consolas", Font.PLAIN, 15);
         try {
-            mainbg = new Images("/resources/backgrounds/mainbg.png");
+            mainbg = new Images("/Resources/backgrounds/mainbg.png");
             debrisField = new DebrisField();
-            title = new Images("/resources/backgrounds/asteroidsTitle.png");
+            title = new Images("/Resources/backgrounds/asteroidsTitle.png");
 
-            red = new Images[]{new Images("/resources/ships/redShip.png"), new Images("/resources/ships/redShipA3.png")};
-            blue = new Images[]{new Images("/resources/ships/blueShip.png"), new Images("/resources/ships/blueShipA3.png")};
-            green = new Images[]{new Images("/resources/ships/greenShip.png"), new Images("/resources/ships/greenShipA3.png")};
+            red = new Images[]{new Images("/Resources/ships/redShip.png"), new Images("/Resources/ships/redShipA3.png")};
+            blue = new Images[]{new Images("/Resources/ships/blueShip.png"), new Images("/Resources/ships/blueShipA3.png")};
+            green = new Images[]{new Images("/Resources/ships/greenShip.png"), new Images("/Resources/ships/greenShipA3.png")};
 
             // set position of images
             title.setPosition((GamePanel.WIDTH / 2) - (title.getWidth() / 2), (GamePanel.HEIGHT * 1 / 6) - (title.getHeight() / 2));
